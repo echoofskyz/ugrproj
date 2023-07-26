@@ -1,0 +1,167 @@
+> Mon May 15 07:18:37 2023
+  created and tested time-stamper
+  for project log
+< Mon May 15 07:19:09 2023
+> Mon May 15 18:29:16 2023
+  work on docker container
+  using: https://www.makeuseof.com/run-ubuntu-as-docker-container/
+  --should make it so that I execute something to open docker-ubuntu shell
+    where I use make to compile my stuff
+< Mon May 15 19:11:31 2023
+> Tue May 16 11:44:42 2023
+  got docker container working as it should
+  created Makefile
+  created hello_world program to test Makefile
+< Tue May 16 12:21:04 2023
+> Wed May 17 08:10:51 2023
+  started defining project structure
+< Wed May 17 08:31:39 2023
+> Thu May 18 08:39:52 2023
+  copied a different project as a template
+  set up glwf/linking for both win and linux
+< Thu May 18 10:30:07 2023
+> Fri May 19 06:39:41 2023
+  created shader_man.c/h
+  currently provides a function
+    to compile shader programs from
+    const char*-s that are vertex
+    and fragment shaders
+< Fri May 19 07:20:05 2023
+> Fri May 19 08:43:21 2023
+  moved gl/draw stuff to seperate
+    start_page file
+< Fri May 19 09:42:57 2023
+> Sat May 20 10:37:46 2023
+  wrote the first version of linked_list.h/c
+  hopefully it works
+  --should set up unit tests for it
+  learned about void pointers
+< Sat May 20 11:28:52 2023
+> Sun May 21 08:08:32 2023
+  started unit tests for linked_list
+  lots of re writing
+< Sun May 21 09:10:17 2023
+> Mon May 22 08:23:18 2023
+  added a bunch of test cases
+  and fixed some defects
+< Mon May 22 10:31:40 2023
+> Tue May 23 08:51:37 2023
+  finished writing unit tests for
+    linked list and fixed all
+    defects found
+< Tue May 23 09:16:30 2023
+> Tue May 23 19:30:20 2023
+  added insert and empty methods to linked_list
+    need to test
+< Tue May 23 19:42:12 2023
+> Tue May 23 19:55:39 2023
+  decided to rewrite lists
+    going to use doubly linked
+    lists and include cursor, not going
+    to store method pointers in list struct
+    making a new singelton Lists or something
+    to do things to lists
+  got it to the point where it compiles
+    haven't yet implemented most of the methods
+    implementing different list managers for
+    different datatypes that basically just
+    wrap the one for void pointers
+  learned that extern basically just makes the compiler
+    look for when the variable is declared again
+    and is defined somewhere else
+< Tue May 23 21:43:15 2023
+> Wed May 24 07:52:02 2023
+  finishd initial implementation of VPLists
+    got it to compile, not tested
+    need to refactor unit tests to use VPLists
+    and add tests for new methods
+< Wed May 24 09:03:04 2023
+> Thu May 25 07:40:54 2023
+  refactored List tests
+    to use/test VPLists
+  --need to add tests for insert,
+    cursor stuff, previous node checks
+< Thu May 25 08:23:34 2023
+> Thu May 25 10:51:17 2023
+  added the rest of the tests for VPLists
+< Thu May 25 11:06:15 2023
+> Thu May 25 15:03:03 2023
+  tried to design page elements, then Shaders
+    planning on makeing a Renderer struct
+    and Renderers to interface with them
+    need to learn how to render text first
+< Thu May 25 16:51:34 2023
+> Thu May 25 19:08:08 2023
+  wrote Renderer type and
+    the skeleton of Renderers
+    tried to figure out how to 
+    render an ellipse in a frag shader
+< Thu May 25 21:07:51 2023
+> Fri May 26 13:19:32 2023
+  got the new stuff to compile and
+    continued to implement Renderers
+< Fri May 26 15:23:14 2023
+> Sat May 27 08:43:49 2023
+  got triangle rendering to work
+< Sat May 27 10:02:23 2023
+> Sun May 28 12:10:15 2023
+  set up draw line
+< Sun May 28 13:05:40 2023
+> Mon May 29 09:15:38 2023
+  set up draw fill rect
+< Mon May 29 09:31:25 2023
+> Tue May 30 09:39:18 2023
+  set up draw stroke rect
+    and draw rect
+< Tue May 30 09:52:42 2023
+> Wed May 31 13:08:29 2023
+  started to set up draw/render fill circle
+< Wed May 31 13:21:51 2023
+> Thu Jun  1 20:11:00 2023
+  continued to implement draw fill circle
+< Thu Jun  1 20:25:19 2023
+> Sat Jun  3 11:56:32 2023
+  continued to implement render fill circle
+< Sat Jun  3 12:07:25 2023
+> Wed Jun  7 14:56:56 2023
+  started to write circle frag shader
+< Wed Jun  7 15:00:47 2023
+> Tue Jun 13 19:16:33 2023
+  got the project to compile (needs testing,
+    frag shader just solid color)
+< Tue Jun 13 19:35:55 2023
+> Thu Jul 20 08:34:26 2023
+  added renderFillCircles to draw loop
+  fixed ShaderUtils error message (was saying 
+    vert shader in frag shader err msg)
+  changed circle shaders bc vec5 does not exist
+  :runs without error, next write circle frag
+    shader
+  -need to decide how I want to fix aspect ratio
+< Thu Jul 20 09:36:29 2023
+> Fri Jul 21 12:49:07 2023
+  wrote the start of the circle frag shader
+  added resolution uniform to circle render
+  added width/height property to renderer
+  added width/height update to resize callback
+  :got a circle to render
+  -need to make all circles render
+  -will probably fix the aspect ratio maybe 4x3?
+< Fri Jul 21 14:05:39 2023
+> Sat Jul 22 12:17:29 2023
+  circles with different positions works just fine
+  enabled blending
+  -temporarily removed depth testing to make transparency
+    work properly
+  :need to re-enable depth testing and render the circles
+    seperatly in order of depth so transparency works correctly
+< Sat Jul 22 13:02:38 2023
+> Mon Jul 24 07:27:13 2023
+  rearranged circle rendering to render one at a time
+  determined that I should get rid of z coord based
+    rendering and do normal 2d order based overlap
+  :need to remove z coord from shape objects
+  :need to redo rendering functions to render
+    objects as they are drawn instead of after
+< Mon Jul 24 08:11:31 2023
+> Wed Jul 26 17:17:43 2023

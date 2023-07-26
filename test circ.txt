@@ -1,0 +1,29 @@
+void mainImage( out vec4 fragColor, in vec2 fragCoord )
+{
+    vec4 circle = vec4(450, 200, 400, 400);
+    
+    vec2 uv = iResolution.xy;
+    
+    float shade = length((vec2(circle.x, circle.y) - fragCoord)
+     * vec2(100.0/circle.z*2.0, 100.0/circle.w*2.0)) - 100.0;
+    
+    shade = clamp(shade, 0.0, 1.0);
+    
+    shade = 1.0 - shade;
+    
+    if (distance(fragCoord.x, 100.0) < 1.0) {
+        shade = 1.0;
+    }
+    
+    if (distance(fragCoord.x, 200.0) < 1.0) {
+        shade = 1.0;
+    }
+    
+    if (distance(fragCoord.x, 300.0) < 1.0) {
+        shade = 1.0;
+    }
+
+    // Output to screen
+    vec4 ret = mix(vec4(0.8, 0.0, 0.3, 1.0), vec4(1.0, 1.0, 1.0, 1.0)*shade, shade);
+    fragColor = ret;
+}
