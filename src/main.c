@@ -78,10 +78,10 @@ int main(void) {
 	glfwGetFramebufferSize(window, &width, &height);
 
 	renderer = newRenderer(width, height);
+	
 	resize_callback(window, width, height);
 	glfwSetFramebufferSizeCallback(window, resize_callback);
 	
-	//glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -94,8 +94,6 @@ int main(void) {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		draw_start(&renderer);
-		Renderers.renderTriangles(&renderer);
-		Renderers.renderFillCircles(&renderer);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

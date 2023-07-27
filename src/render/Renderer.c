@@ -5,9 +5,6 @@ Renderer newRenderer(int width, int height) {
 		.fillColor = newColor,
 		.strokeColor = newColor,
 		.strokeWeight = 0.01,
-		.triangles = newList,
-		.fillCircles = newList,
-		.text = newList,
 		.width = width,
 		.height = height
 	};
