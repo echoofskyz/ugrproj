@@ -86,12 +86,14 @@ int main(void) {
 	
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
+	
+	
 	while (!glfwWindowShouldClose(window))
 	{
-		
-		processInput(window);
 		glClearColor(0.5f, 0.3f, 0.3f, 0.1f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+		processInput(window);
 		
 		draw_start(&renderer);
 

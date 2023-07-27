@@ -165,3 +165,24 @@
     objects as they are drawn instead of after
 < Mon Jul 24 08:11:31 2023
 > Wed Jul 26 17:17:43 2023
+  made the project be a git repo
+  removed the z coord from everything
+  made draw functions render immediately
+  changed triangle rendering color passthrough
+    to use a uniform instead of a vertex attribute
+  got everything to run correctly again
+< Wed Jul 26 19:24:21 2023
+> Thu Jul 27 17:28:14 2023
+  changed the way I get colors into the
+    triangle shader to a unifrom instead of
+    attribute pointers
+  -figured out that the issue where circle 
+    rendering wouldn't work was somehow caused
+    by seting up the uniform before setting
+    the shader to use, no idea why, just followed
+    the instructions on khronos' site about
+    common errors
+    (fixed this)
+  changed circle rendering to use uniforms
+    instead of vert attrib pointers
+ < Thu Jul 27 18:01:47 2023
