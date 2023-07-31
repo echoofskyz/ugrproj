@@ -18,7 +18,7 @@ static void init() {
 	if (initialized != 0) {
 		return;
 	}
-	
+
 	const char* vertShader =
 			"#version 330 core\n"
 			"layout (location = 0) in vec2 inPos;\n"
@@ -46,7 +46,7 @@ static void init() {
 			"void main()\n"
 			"{\n"
 			"  vec2 uv = (gl_FragCoord.xy / u_res - 0.5) * 2.0;\n"
-			"  float dist_field = length(u_pos*100.0 - uv*100.0) - u_data.x*100.0;\n"
+			"  float dist_field = length(u_pos*100.0*u_data.y - uv*100.0*u_data.y) - u_data.x*100.0*u_data.y;\n"
 			"  dist_field = 1.0 - clamp(dist_field, 0.0, 1.0);\n"
 			"  FragColor = vec4(u_color.rgb, u_color.a * dist_field);\n"
 			"}\0";
@@ -71,7 +71,7 @@ static void renderTri(Renderer* renderer,
 		float x3, float y3,
 		float r, float g, float b, float a) {
 	
-	float vertices[18] = {
+	float vertices[6] = {
 		x1, y1,
 		x2, y2,
 		x3, y3
@@ -137,13 +137,17 @@ static void renderCircle(Renderer* renderer,
 			
 	// TODO: change shader to actually use the hardness variable
 	
-	float vertices[30] = {
-		x, y + 2.1*rad,
-
-		x + sqrt(3*rad*rad), y - r,
-		
+	// make sure that the bounding tessel is large enough to
+	//   show all of the circle border
+	rad = rad * 2;
+	
+	float vertices[6] = {
+		x, y + 2*rad,
+		x + sqrt(3*rad*rad), y - rad,
 		x - sqrt(3*rad*rad), y - rad
 	};
+	
+	rad = rad / 2;
 	
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -181,7 +185,7 @@ static void line(Renderer* renderer,
 	//   : maybe make the lines not jagged - like my circles
 	
 	// get vector perpendicular to line
-	float vec[] = {-(y2 - y1), (x2 - x1)};
+	float vec[2] = {-(y2 - y1), (x2 - x1)};
 	
 	// normalize vector
 	float len = sqrt(vec[0] * vec[0] + vec[1] * vec[1]);
@@ -205,6 +209,21 @@ static void line(Renderer* renderer,
 			x2+vec[0], y2 + vec[1],
 			x2-vec[0], y2 - vec[1],
 			x1+vec[0], y1 + vec[1],
+			renderer->strokeColor.r,
+			renderer->strokeColor.g,
+			renderer->strokeColor.b,
+			renderer->strokeColor.a);
+	
+	// render line caps
+	renderCircle(renderer,
+			x1, y1, renderer->strokeWeight, 10.0,
+			renderer->strokeColor.r,
+			renderer->strokeColor.g,
+			renderer->strokeColor.b,
+			renderer->strokeColor.a);
+	
+	renderCircle(renderer,
+			x2, y2, renderer->strokeWeight, 10.0,
 			renderer->strokeColor.r,
 			renderer->strokeColor.g,
 			renderer->strokeColor.b,

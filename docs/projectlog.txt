@@ -185,4 +185,18 @@
     (fixed this)
   changed circle rendering to use uniforms
     instead of vert attrib pointers
- < Thu Jul 27 18:01:47 2023
+< Thu Jul 27 18:01:47 2023
+> Mon Jul 31 07:19:27 2023
+  updated sizes of vertex arrays
+  added .PHONY to makefile
+  made source files listing a variable in makefile
+  fixed line render
+    - radius was replaced by red in the vertex buffer
+      initialization at one point
+  added linecaps to lines
+  made circle render harndess work
+  : need to soften lines
+  : need to figure out how I want text rendering to
+    be structured
+  : need to make points for all letters
+< Mon Jul 31 07:53:56 2023

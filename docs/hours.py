@@ -18,10 +18,12 @@ for line in file.readlines():
 
 file.close()
 
+print("hours:minutes")
+
 for in_, out in zip(clock_ins, clock_outs):
     length = out - in_
-    print(str(length)[:-3:]+" h:m")
+    print(str(length)[:-3:])
     total += length
 
-print(f"Total: {str(total)[:-3:]} h:m")
+print(f"Total: {int(total.total_seconds()//3600)}:{int((total.total_seconds()//60)%60)}")
 input("ENTER to close");
