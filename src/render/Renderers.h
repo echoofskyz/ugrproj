@@ -12,6 +12,8 @@ struct Renderers {
 		float x, float y, float w, float h);
 	void (*circle)(Renderer* renderer,
 		float x, float y, float r, float h);
+	void (*text)(Renderer* renderer,
+		float x, float y, float s, char* text, int length);
 };
 
 extern const struct Renderers Renderers;

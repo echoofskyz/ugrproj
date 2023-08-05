@@ -230,10 +230,83 @@ static void line(Renderer* renderer,
 			renderer->strokeColor.a);
 }
 
+static void text(Renderer* renderer,
+		float x, float y, float s, char* text, int length) {
+	float ox = -0.03;
+	float oy = 0;
+	float k = 0.05;
+	float ls = 0.07;
+	
+	for(int i=0;i<length;i++) {
+		switch(text[i]) {
+			case 'A':
+			case 'a':
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.04*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.04*s+y+oy, 0.06*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.04*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case 'B':
+			case 'b':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.035*s+y+oy, 0.05*s+x+ox, -0.035*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.02*s+y+oy, 0.06*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.03*s+y+oy, 0.05*s+x+ox, -0.035*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.035*s+y+oy, 0.06*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.04*s+y+oy, 0.06*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case 'C':
+			case 'c':
+				line(renderer, 0.06*s+x+ox, -0.02*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.01*s+y+oy, 0.03*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.02*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.05*s+y+oy, 0.03*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.05*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case 'D':
+			case 'd':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.055*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.055*s+y+oy, 0.06*s+x+ox, -0.035*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.035*s+y+oy, 0.05*s+x+ox, -0.015*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.015*s+y+oy, 0.02*s+x+ox, -0.01*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case '\n':
+				ox = -0.03;
+				oy-=ls*s;
+				break;
+			
+			default:
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.01*s+y+oy);
+				ox+=k*s;
+				break;
+		}
+	}
+}
+
 const struct Renderers Renderers = {
 	.init = init,
 	.triangle = triangle,
 	.line = line,
 	.rect = rect,
-	.circle = circle
+	.circle = circle,
+	.text = text
 };

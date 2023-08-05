@@ -200,3 +200,11 @@
     be structured
   : need to make points for all letters
 < Mon Jul 31 07:53:56 2023
+> Tue Aug  1 08:29:32 2023
+  plotted out capital letters on graph paper
+    for vector based text rendering
+< Tue Aug  1 08:58:52 2023
+> Sat Aug  5 06:43:39 2023
+  added text function to renderers.h/.c
+  added cases for abcd and \n
+< Sat Aug  5 07:49:30 2023
