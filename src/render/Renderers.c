@@ -412,6 +412,134 @@ static void text(Renderer* renderer,
 				ox+=k*s;
 				break;
 			
+			case 'R':
+			case 'r':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.03*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.04*s+y+oy, 0.06*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.04*s+y+oy, 0.05*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.04*s+x+ox, -0.04*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case 'S':
+			case 's':
+				line(renderer, 0.06*s+x+ox, -0.01*s+y+oy, 0.03*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.03*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.03*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.03*s+y+oy, 0.03*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.03*s+y+oy, 0.06*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.06*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case 'T':
+			case 't':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.04*s+x+ox, -0.01*s+y+oy, 0.04*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case 'U':
+			case 'u':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.02*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case 'V':
+			case 'v':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.04*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.01*s+y+oy, 0.04*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case 'W':
+			case 'w':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.04*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.06*s+y+oy, 0.04*s+x+ox, -0.04*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case 'X':
+			case 'x':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case 'Y':
+			case 'y':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.04*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.01*s+y+oy, 0.04*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.04*s+x+ox, -0.06*s+y+oy, 0.04*s+x+ox, -0.04*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case 'Z':
+			case 'z':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case '1':
+				line(renderer, 0.02*s+x+ox, -0.03*s+y+oy, 0.04*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.04*s+x+ox, -0.01*s+y+oy, 0.04*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case '2':
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.03*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.01*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.04*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.04*s+y+oy, 0.02*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.06*s+y+oy, 0.02*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case '3':
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.03*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.01*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.02*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.02*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.035*s+y+oy, 0.045*s+x+ox, -0.035*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case '4':
+				line(renderer, 0.02*s+x+ox, -0.04*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.04*s+y+oy, 0.06*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.01*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case '5':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.03*s+y+oy, 0.02*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.03*s+y+oy, 0.06*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.06*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+			
 			case '\n':
 				ox = -0.03;
 				oy-=ls*s;
