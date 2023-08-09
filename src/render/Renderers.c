@@ -540,6 +540,84 @@ static void text(Renderer* renderer,
 				ox+=k*s;
 				break;
 			
+			case '6':
+				line(renderer, 0.06*s+x+ox, -0.02*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.01*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.03*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.02*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.02*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.06*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.04*s+y+oy, 0.05*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.03*s+y+oy, 0.05*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.03*s+y+oy, 0.02*s+x+ox, -0.04*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case '7':
+				line(renderer, 0.02*s+x+ox, -0.01*s+y+oy, 0.06*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.04*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.01*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case '8':
+				line(renderer, 0.06*s+x+ox, -0.02*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.01*s+y+oy, 0.03*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.02*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.035*s+y+oy, 0.02*s+x+ox, -0.03*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.035*s+y+oy, 0.02*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.05*s+y+oy, 0.02*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.05*s+y+oy, 0.03*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.03*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.03*s+y+oy, 0.05*s+x+ox, -0.035*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.04*s+y+oy, 0.05*s+x+ox, -0.035*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.04*s+y+oy, 0.06*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.035*s+y+oy, 0.05*s+x+ox, -0.035*s+y+oy);
+				ox+=k*s;
+				break;
+			
+			case '9':
+				line(renderer, 0.03*s+x+ox, -0.01*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.03*s+y+oy, 0.02*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.03*s+y+oy, 0.03*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.04*s+y+oy, 0.03*s+x+ox, -0.04*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.02*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.02*s+y+oy, 0.06*s+x+ox, -0.06*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case '0':
+				line(renderer, 0.06*s+x+ox, -0.02*s+y+oy, 0.05*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.01*s+y+oy, 0.03*s+x+ox, -0.01*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.01*s+y+oy, 0.02*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.02*s+y+oy, 0.02*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.05*s+y+oy, 0.03*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.05*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				ox+=k*s;
+				break;
+				
+			case ' ':
+				ox+=k*s;
+				break;
+				
+			// null character
+			case '\x0':
+				line(renderer, 0.02*s+x+ox, -0.05*s+y+oy, 0.03*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.03*s+x+ox, -0.06*s+y+oy, 0.05*s+x+ox, -0.06*s+y+oy);
+				line(renderer, 0.05*s+x+ox, -0.06*s+y+oy, 0.06*s+x+ox, -0.05*s+y+oy);
+				line(renderer, 0.06*s+x+ox, -0.05*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				line(renderer, 0.02*s+x+ox, -0.05*s+y+oy, 0.06*s+x+ox, -0.02*s+y+oy);
+				ox+=k*s;
+				break;
+			
 			case '\n':
 				ox = -0.03;
 				oy-=ls*s;
