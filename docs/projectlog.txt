@@ -220,3 +220,22 @@
   need to finish getting null to work
   then make lines nicer
 < Tue Aug  8 22:52:06 2023
+> Wed Aug  9 08:31:32 2023
+  removed null case, the text length parameter
+    just must be set to the length of the char
+    array input or i'll end up reading something
+    else, not uninitialized array space
+  made lines soft, need to find a better way
+    to handle stroke weight and line hardness
+  had to first do algebra to get two equations
+    for closest x and closest y (from uv to line)
+    then had to copy and edit circle shader to work
+    then had to debug
+    one big issue was that I had my slope backwards
+    another was that I somehow got my equations
+      for closest x and closest y backwards???
+    then I made sure that I could find a line hardness
+      and line box width pair that made text look ok
+  todo: circle rendering to not use renderCircle, just
+    circle, and renderTriangle to just be triangle
+< Wed Aug  9 12:08:24 2023
