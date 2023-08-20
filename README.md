@@ -5,7 +5,7 @@
  Docker
 
 ## Setup Instructions:
- open terminal, cd to URproj (root directory)
+ open terminal, cd to urproj (root directory)
 
  ### Linux:
   run:
@@ -18,7 +18,7 @@
   `.\build_docker_image.bat`
 
 ## Compilation Instructions:
- open terminal, cd to URproj (root directory)
+ open terminal, cd to urproj (root directory)
 
  ### Linux:
   run:
@@ -45,7 +45,7 @@
 
 ## Running Instructions
  once compilation has finished,
- go to /URProj/build
+ go to /urproj/build
 
  ### Linux
   run
