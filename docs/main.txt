@@ -1,0 +1,12 @@
+creates window
+-sets up environmental stuff
+
+-remove default page decorations
+-add new page decorations
+	close button
+	minimize
+	maximize
+	fullscreen
+	options specific to pages
+
+opens start menu page
