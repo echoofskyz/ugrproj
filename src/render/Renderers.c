@@ -81,13 +81,7 @@ static void init() {
 			"  vec2 c = vec2(cx, cy);\n"
 			"  float dist_field = length(c*100.0*u_data.y - uv*100.0*u_data.y) - u_data.x*100.0*u_data.y;\n"
 			"  dist_field = 1.0 - clamp(dist_field, 0.0, 1.0);\n"
-			//"  if (abs(uv.x - cx) < 0.01 && abs(uv.y - cy) < 0.01) {\n"
-			//"    FragColor= vec4(1.0, 0.0, 0.0, 1.0);\n"
-			//"  } else if (dist_field < 0.01) {\n"
-			//"  FragColor = vec4(1.0, 1.0, 1.0, 1.0);\n"
-			//"  } else {\n"
 			"  FragColor = vec4(u_color.rgb, u_color.a * dist_field);\n"
-			//"  }\n"
 			"}\0";
 	
 	// compile shaders
@@ -265,7 +259,7 @@ static void line(Renderer* renderer,
 	glUniform2f(glGetUniformLocation(lineShader, "u_res"), renderer->width, renderer->height);
 	glUniform2f(glGetUniformLocation(lineShader, "u_pos1"), x1, y1);
 	glUniform2f(glGetUniformLocation(lineShader, "u_pos2"), x2, y2);
-	glUniform2f(glGetUniformLocation(lineShader, "u_data"), renderer->strokeWeight/4.0, 1.5);
+	glUniform2f(glGetUniformLocation(lineShader, "u_data"), renderer->strokeWeight/4.0, 2.5);
 	glUniform4f(glGetUniformLocation(lineShader, "u_color"),
 			renderer->strokeColor.r,
 			renderer->strokeColor.g,
@@ -277,9 +271,9 @@ static void line(Renderer* renderer,
 
 static void text(Renderer* renderer,
 		float x, float y, float s, char* text, int length) {
-	float ox = -0.03;
+	float ox = -0.02;
 	float oy = 0;
-	float k = 0.05;
+	float k = 0.06;
 	float ls = 0.07;
 	
 	for(int i=0;i<length;i++) {
@@ -654,7 +648,7 @@ static void text(Renderer* renderer,
 				break;
 			
 			case '\n':
-				ox = -0.03;
+				ox = -0.02;
 				oy-=ls*s;
 				break;
 			

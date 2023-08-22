@@ -18,5 +18,5 @@ void draw_start(Renderer* rend) {
 	Renderers.line(rend, -0.4, -0.8, 0.8, -0.8);
 	//rend->fillColor = (Color){.r = 1.0, .g = 0.0, .b = 0.0, .a = 1.0};
 	//Renderers.circle(rend, 0.0, 0.0, 0.1, 1.0);
-	Renderers.text(rend, -1.0, 1.0, 2.0, "ab\ncdefgh  ijklmno\npqrstu vwxyz1234\n5678 90", 60);
+	Renderers.text(rend, -1.0, 1.0, 1.0, "ab\ncdefgh  ijklmno\npqrstu vwxyz1234\n5678 90", 60);
 }

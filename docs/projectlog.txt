@@ -239,3 +239,13 @@
   todo: circle rendering to not use renderCircle, just
     circle, and renderTriangle to just be triangle
 < Wed Aug  9 12:08:24 2023
+> Tue Aug 22 14:18:37 2023
+  moved page_start.c.old to old dir
+  made the window aspect ratio static
+  tested rendering smaller text, calibrated text rendering
+    to work properly for small text
+  moved GUIelement workspace to old
+  added mouse position callback
+  restyled '{}'s in main
+  added mouse button press callback
+< Tue Aug 22 15:23:05 2023
