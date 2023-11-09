@@ -1,4 +1,3 @@
-#include "startPage.h"
 #include "dfaPage.h"
 
 static int btnDFAdown = 0; 
@@ -7,7 +6,7 @@ static void draw(Renderer* rend) {
 	
 	// background
 	rend->fillColor = (Color)
-			{.r=0.2, .g=0.2, .b=0.2, .a=1.0};
+			{.r=0.2, .g=0.2, .b=0.9, .a=1.0};
 	Renderers.rect(rend, -1.0, 1.0, 2.0, 2.0);
 	
 	// DFA button
@@ -86,7 +85,7 @@ static void click(AppData* appdata, int button, int action)
 	}
 }
 
-const Page startPage =
+const Page dfaPage =
 {
 	.draw = draw,
 	.click = click

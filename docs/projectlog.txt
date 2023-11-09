@@ -261,3 +261,9 @@
   started to restyle things
   tested it and it compiles!
 < Wed Aug 23 14:05:45 2023
+> Thu Nov  9 16:19:17 2023
+  made the DFA button work only when clicked
+  moved the declaration for Page type to AppData header
+  changed code to pass AppData to page click/render
+  DFA button now works!!!!!!?!!!!
+< Thu Nov  9 16:58:35 2023

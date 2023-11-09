@@ -1,5 +1,5 @@
-#ifndef STARTPAGE_H
-#define STARTPAGE_H
+#ifndef DFAPAGE_H
+#define DFAPAGE_H
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -9,6 +9,6 @@
 #include "./render/Color.h"
 #include <stdio.h>
 
-extern const Page startPage;
+extern const Page dfaPage;
 
 #endif

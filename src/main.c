@@ -7,6 +7,7 @@
 #include "./render/Renderer.h"
 
 #include "startPage.h"
+#include "dfaPage.h"
 
 GLFWwindow* window;
 Renderer renderer;
@@ -34,8 +35,7 @@ static void resize_callback(GLFWwindow* window,
 static void mouse_button_callback(GLFWwindow* window,
 		int button, int action, int mods)
 {
-	appData.currentPage.click(button, action,
-		appData.mouseX, appData.mouseY);
+	appData.currentPage.click(&appData, button, action);
 }
 
 static void mouse_pos_callback(GLFWwindow* window,
