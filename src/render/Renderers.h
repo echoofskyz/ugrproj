@@ -1,4 +1,12 @@
+#ifndef RENDERERS_H
+#define RENDERERS_H
+
 #include "Renderer.h"
+#include "ShaderUtils.h"
+#include "../collections/VPLists.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <math.h>
 
 struct Renderers {
 	void (*init)();
@@ -17,3 +25,5 @@ struct Renderers {
 };
 
 extern const struct Renderers Renderers;
+
+#endif

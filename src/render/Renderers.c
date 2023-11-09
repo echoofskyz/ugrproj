@@ -1,9 +1,4 @@
 #include "Renderers.h"
-#include "ShaderUtils.h"
-#include "../collections/VPLists.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
 
 static int initialized = 0;
 

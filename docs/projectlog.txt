@@ -249,3 +249,15 @@
   restyled '{}'s in main
   added mouse button press callback
 < Tue Aug 22 15:23:05 2023
+> Wed Aug 23 11:24:05 2023
+  added Page type
+  added currentPage to globalish state
+  added delete node to vpLists and didn't test it
+  set up mouse handeling on start page
+  started to popuate start page
+  changed default strokeWeight
+  moved some includes in .c files to .h files
+  added some include guards
+  started to restyle things
+  tested it and it compiles!
+< Wed Aug 23 14:05:45 2023

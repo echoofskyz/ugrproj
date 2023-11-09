@@ -10,3 +10,9 @@ creates window
 	options specific to pages
 
 opens start menu page
+
+credits:
+Andy Berns: rubber duck
+GLFW docs
+khronos group wiki
+the learn open gl site i was using

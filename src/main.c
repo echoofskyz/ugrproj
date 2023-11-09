@@ -5,7 +5,8 @@
 #include "AppData.h"
 #include "./render/Renderers.h"
 #include "./render/Renderer.h"
-#include "page_start.h"
+
+#include "startPage.h"
 
 GLFWwindow* window;
 Renderer renderer;
@@ -33,16 +34,8 @@ static void resize_callback(GLFWwindow* window,
 static void mouse_button_callback(GLFWwindow* window,
 		int button, int action, int mods)
 {
-	if (button == GLFW_MOUSE_BUTTON_RIGHT
-			&& action == GLFW_PRESS)
-	{
-		printf("RIGHT!\n");
-	}
-	else if (button == GLFW_MOUSE_BUTTON_LEFT
-			&& action == GLFW_PRESS)
-	{
-		printf("LEFT!\n");
-	}
+	appData.currentPage.click(button, action,
+		appData.mouseX, appData.mouseY);
 }
 
 static void mouse_pos_callback(GLFWwindow* window,
@@ -103,6 +96,7 @@ int main(void)
 	
 	appData.mouseX = 0.0;
 	appData.mouseY = 0.0;
+	appData.currentPage = startPage;
 	
 	// set key handler
 	glfwSetKeyCallback(window, key_callback);
@@ -129,7 +123,7 @@ int main(void)
 		glClearColor(0.5f, 0.3f, 0.3f, 0.1f);
 	    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
-		draw_start(&renderer);
+		appData.currentPage.draw(&renderer);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

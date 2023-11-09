@@ -240,6 +240,16 @@ void del(List* list, int index) {
 	list->size--;
 }
 
+void delNode(List* list, ListNode* node) {
+	// deletes a given node from the list
+	
+	node->prev->next = node->next;
+	node->next->prev = node->prev;
+	
+	free(node);
+	list->size--;
+}
+
 void delAll(List* list) {
 	// removes/frees all elements in list
 	

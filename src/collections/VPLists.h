@@ -11,6 +11,7 @@ struct VPLists {
 	void (*push)(List*, void*);
 	void (*pushFront)(List*, void*);
 	void (*del)(List*, int);
+	void (*delNode)(List*, ListNode*);
 	void (*delAll)(List*);
 	void (*insert)(List*, void*, int);
 	void (*set)(List*, int, void*);

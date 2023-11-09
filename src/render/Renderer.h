@@ -2,7 +2,6 @@
 #define RENDERER_H
 
 #include "Color.h"
-#include "../collections/List.h"
 
 typedef struct Renderer {
 	Color fillColor;
