@@ -267,3 +267,12 @@
   changed code to pass AppData to page click/render
   DFA button now works!!!!!!?!!!!
 < Thu Nov  9 16:58:35 2023
+> Fri Nov 10 15:18:30 2023
+  imported List/VPLists to dfaPage
+  assigned char pointer index to derefrence of char pointer pointer
+  hurt myself trying to cast pointers
+  tried to set up DFA test sequence variable
+  todo: make CharLists
+  add on terminate function to Page
+  ? do I want to have all page data be saved to appdata?
+< Fri Nov 10 16:00:09 2023

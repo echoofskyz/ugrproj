@@ -1,4 +1,6 @@
 // Void Pointer List manager
+#ifndef VPLISTS_H
+#define VPLISTS_H
 
 #include "List.h"
 
@@ -19,3 +21,5 @@ struct VPLists {
 };
 
 extern const struct VPLists VPLists;
+
+#endif
