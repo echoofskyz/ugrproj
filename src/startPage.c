@@ -3,6 +3,11 @@
 
 static int btnDFAdown = 0; 
 
+static void freePage()
+{
+
+}
+
 static void draw(Renderer* rend) {
 	
 	// background
@@ -48,6 +53,7 @@ static void leftClick(AppData* appdata, int action)
 		printf("LEFT PRESSED AT: %f, %f\n", mouseX, mouseY);
 		if (mouseX > -0.2 && mouseX < 0.2 && mouseY > -0.2 && mouseY < 0.2) {
 			btnDFAdown = 1;
+			freePage();
 			appdata->currentPage = dfaPage;
 		}
 		
@@ -89,5 +95,6 @@ static void click(AppData* appdata, int button, int action)
 const Page startPage =
 {
 	.draw = draw,
-	.click = click
+	.click = click,
+	.free = freePage
 };

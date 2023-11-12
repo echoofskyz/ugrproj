@@ -121,14 +121,16 @@ int main(void)
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.5f, 0.3f, 0.3f, 0.1f);
-	    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
 		appData.currentPage.draw(&renderer);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
 	}
-
+	
+	appData.currentPage.free();
 	glfwTerminate();
+	
 	return 0;
 }

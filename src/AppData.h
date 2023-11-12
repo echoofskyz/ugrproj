@@ -10,6 +10,7 @@ typedef struct Page Page;
 struct Page {
 	void (*draw)(Renderer*);
 	void (*click)(AppData* appdata, int button, int action);
+	void (*free)();
 };
 
 struct AppData {

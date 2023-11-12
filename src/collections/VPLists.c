@@ -3,7 +3,7 @@
 #include "VPLists.h"
 #include <stdlib.h>
 
-void* pop(List* list) {
+static void* pop(List* list) {
 	// pops element from back of listy
 	
 	if (list->size == 0) {
@@ -37,7 +37,7 @@ void* pop(List* list) {
 	return data;
 }
 
-void* popFront(List* list) {
+static void* popFront(List* list) {
 	// pops element from front of list
 	
 	if (list->size == 0) {
@@ -71,7 +71,7 @@ void* popFront(List* list) {
 	return data;
 }
 
-void* next(List* list) {
+static void* next(List* list) {
 	// moves cursor to next node and returns nodes data
 	
 	// cursor uninitialized, start at head
@@ -89,7 +89,7 @@ void* next(List* list) {
 	return list->cursor->data;
 }
 
-void* prev(List* list) {
+static void* prev(List* list) {
 	// moves cursor to previous node and returns nodes data
 	
 	// cursor uninitialized, start at tail
@@ -107,7 +107,7 @@ void* prev(List* list) {
 	return list->cursor->data;
 }
 
-void* get(List* list, int index) {
+static void* get(List* list, int index) {
 	// returns the data in the given list at the given index
 	
 	if (index < 0 || index >= list->size) {
@@ -135,7 +135,7 @@ void* get(List* list, int index) {
 	return n->data;
 }
 
-void push(List* list, void* data) {
+static void push(List* list, void* data) {
 	// pushes element to back of list
 	
 	ListNode* n = malloc(sizeof(ListNode));
@@ -156,7 +156,7 @@ void push(List* list, void* data) {
 	list->size++;
 }
 
-void pushFront(List* list, void* data) {
+static void pushFront(List* list, void* data) {
 	// pushes element to front of list
 	
 	ListNode* n = malloc(sizeof(ListNode));
@@ -176,7 +176,7 @@ void pushFront(List* list, void* data) {
 	list->head = n;
 }
 
-void del(List* list, int index) {
+static void del(List* list, int index) {
 	// deletes element at given index
 	
 	// index out of bounds, do nothing
@@ -240,7 +240,7 @@ void del(List* list, int index) {
 	list->size--;
 }
 
-void delNode(List* list, ListNode* node) {
+static void delNode(List* list, ListNode* node) {
 	// deletes a given node from the list
 	
 	node->prev->next = node->next;
@@ -250,7 +250,7 @@ void delNode(List* list, ListNode* node) {
 	list->size--;
 }
 
-void delAll(List* list) {
+static void delAll(List* list) {
 	// removes/frees all elements in list
 	
 	for (int i=list->size;i>0;i--) {
@@ -258,7 +258,7 @@ void delAll(List* list) {
 	}
 }
 
-void insert(List* list, void* data, int index) {
+static void insert(List* list, void* data, int index) {
 	// inserts element at given index
 	
 	// out of bounds do nothing
@@ -308,7 +308,7 @@ void insert(List* list, void* data, int index) {
 	list->size++;
 }
 
-void set(List* list, int index, void* data) {
+static void set(List* list, int index, void* data) {
 	// sets the data in the given list at the given index
 	
 	// if index is out of bounds do nothing
@@ -337,7 +337,7 @@ void set(List* list, int index, void* data) {
 	n->data = data;
 }
 
-void resetCursor(List* list) {
+static void resetCursor(List* list) {
 	// resets the cursor
 	
 	list->cursor = NULL;

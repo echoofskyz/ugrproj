@@ -276,3 +276,12 @@
   add on terminate function to Page
   ? do I want to have all page data be saved to appdata?
 < Fri Nov 10 16:00:09 2023
+> Sat Nov 11 14:35:28 2023
+  created CharLists, basically a bunch of wrapper
+    functions for VPLists that allow for storing chars
+  -still need to add on terminate function to Page, CharList needs
+    to be free'd
+< Sat Nov 11 15:04:26 2023
+> Sun Nov 12 15:18:39 2023
+  added Page.free()
+< Sun Nov 12 15:26:14 2023

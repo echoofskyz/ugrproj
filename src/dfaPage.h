@@ -8,7 +8,7 @@
 #include "./render/Renderers.h"
 #include "./render/Color.h"
 #include <stdio.h>
-#include "./collections/VPLists.h"
+#include "./collections/CharLists.h"
 
 extern const Page dfaPage;
 

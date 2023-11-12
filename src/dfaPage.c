@@ -3,6 +3,11 @@
 static int btnDFAdown = 0;
 static List testSeq;
 
+static void freePage()
+{
+	CharLists.delAll(&testSeq);
+}
+
 static void draw(Renderer* rend)
 {
 	// don't know the right way to do this,
@@ -17,17 +22,14 @@ static void draw(Renderer* rend)
 	
 	if (testSeq.size < 10)
 	{
-		char a = 'a';
-		VPLists.push(&testSeq, (void*)&a);
+		CharLists.push(&testSeq, 'a');
 	}
 	
 	char testSeqStr[testSeq.size];
 	
 	for (int i = 0; i < testSeq.size; i++)
 	{
-		char b = 'b';
-		testSeqStr[i] = b;
-		//((char*)VPLists.next(&testSeq))[0];
+		testSeqStr[i] = CharLists.next(&testSeq);
 	}
 	printf("%d, %s\n", testSeq.size, testSeqStr);
 	
@@ -107,5 +109,6 @@ static void click(AppData* appdata, int button, int action)
 const Page dfaPage =
 {
 	.draw = draw,
-	.click = click
+	.click = click,
+	.free = freePage
 };
