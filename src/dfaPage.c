@@ -10,19 +10,14 @@ static void freePage()
 
 static void draw(Renderer* rend)
 {
-	// don't know the right way to do this,
-	//   basically check if testSeq might
-	//   not be initialized and if so
-	//   reinitialize it
-	// -might not be necessary
 	if (testSeq.head == NULL)
 	{
 		testSeq = newList;
-	}
+		while (testSeq.size < 20)
+		{
+			CharLists.push(&testSeq, 'a');
+		}
 	
-	if (testSeq.size < 10)
-	{
-		CharLists.push(&testSeq, 'a');
 	}
 	
 	char testSeqStr[testSeq.size];
@@ -31,29 +26,34 @@ static void draw(Renderer* rend)
 	{
 		testSeqStr[i] = CharLists.next(&testSeq);
 	}
-	printf("%d, %s\n", testSeq.size, testSeqStr);
 	
 	VPLists.resetCursor(&testSeq);
 	
-	// background
-	rend->fillColor = (Color)
-			{.r=0.4, .g=0.4, .b=0.4, .a=1.0};
+	//background
+	rend->fillColor = (Color){.r=0.7, .g=0.8, .b=0.7, .a=1.0};
 	Renderers.rect(rend, -1.0, 1.0, 2.0, 2.0);
 	
-	// DFA button text
-	rend->strokeColor = (Color)
-			{.r=0.05, .g=0.3, .b=0.05, .a=1.0};
-	rend->strokeWeight = 0.02;
-	Renderers.text(rend, -0.18, 0.15, 2.0, testSeqStr, testSeq.size);
+	/* 
+		render for nodes goes here
+	*/
 	
-	// DFA button graphic
-	rend->fillColor = (Color) 
-			{.r=0.05, .g=0.3, .b=0.05, .a=1.0};
-	rend->strokeColor = (Color)
-			{.r=0.0, .g=0.0, .b=0.0, .a=1.0};
-	Renderers.line(rend, 0.0, -0.05, 0.1, -0.02);
-	Renderers.line(rend, 0.0, -0.05, -0.1, -0.03);
-	Renderers.circle(rend, 0.0, -0.05, 0.05, 1.0);
+	//test seq box background
+	rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=1.0};
+	Renderers.rect(rend, -1.0, 1.0, 2.0, 0.2);
+	
+	//test seq box foreground
+	rend->fillColor = (Color){.r=0.9, .g=1.0, .b=0.9, .a=1.0};
+	Renderers.rect(rend, -0.9, 0.99, 1.8, 0.18);
+	Renderers.circle(rend, -0.9, 0.9, 0.09, 3.0);
+	Renderers.circle(rend, 0.9, 0.9, 0.09, 3.0);
+	
+	//test seq text
+	// might want to be able to scroll around based on what transition is
+	// being run and when the text overflows
+	//  overflows at 16 characters
+	rend->strokeColor = (Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
+	rend->strokeWeight = 0.02;
+	Renderers.text(rend, -0.95, 0.96, 2.0, testSeqStr, testSeq.size);
 }
 
 static void leftClick(AppData* appdata, int action)
