@@ -20,6 +20,10 @@ static void key_callback(GLFWwindow* window,
 	{
 		glfwSetWindowShouldClose(window, GLFW_TRUE);
 	}
+	else
+	{
+		appData.currentPage.keyPress(&appData, key, action);
+	}
 }
 
 static void resize_callback(GLFWwindow* window,

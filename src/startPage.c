@@ -92,9 +92,15 @@ static void click(AppData* appdata, int button, int action)
 	}
 }
 
+static void keyPress(AppData* appdata, int key, int action)
+{
+
+}
+
 const Page startPage =
 {
 	.draw = draw,
 	.click = click,
+	.keyPress = keyPress,
 	.free = freePage
 };

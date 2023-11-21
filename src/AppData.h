@@ -9,8 +9,9 @@ typedef struct Page Page;
 
 struct Page {
 	void (*draw)(Renderer*);
-	void (*click)(AppData* appdata, int button, int action);
+	void (*click)(AppData*, int button, int action);
 	void (*free)();
+	void (*keyPress)(AppData*, int key, int action);
 };
 
 struct AppData {

@@ -13,10 +13,12 @@ static void draw(Renderer* rend)
 	if (testSeq.head == NULL)
 	{
 		testSeq = newList;
+		/*
 		while (testSeq.size < 20)
 		{
 			CharLists.push(&testSeq, 'a');
 		}
+		*/
 	
 	}
 	
@@ -106,9 +108,24 @@ static void click(AppData* appdata, int button, int action)
 	}
 }
 
+static void keyPress(AppData* appdata, int key, int action)
+{
+	if (action == GLFW_PRESS || action == GLFW_REPEAT) 
+	{
+		if (key == GLFW_KEY_BACKSPACE) {
+			CharLists.pop(&testSeq);
+		}
+		else
+		{
+			CharLists.push(&testSeq, (char)key);
+		}
+	}
+}
+
 const Page dfaPage =
 {
 	.draw = draw,
 	.click = click,
+	.keyPress = keyPress,
 	.free = freePage
 };
