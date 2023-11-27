@@ -9,6 +9,9 @@
 #include "./render/Color.h"
 #include <stdio.h>
 #include "./collections/CharLists.h"
+#include "./collections/DFANodeLists.h"
+#include "DFATypes.h"
+#include <math.h>
 
 extern const Page dfaPage;
 
