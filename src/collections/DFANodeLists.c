@@ -8,7 +8,13 @@ static void push(List* list, int n, float x, float y)
 	dataPtr->n = n;
 	dataPtr->x = x;
 	dataPtr->y = y;
+	dataPtr->isAccept = 0;
 	VPLists.push(list, (void*)dataPtr);
+}
+
+static void add(List* list, DFANode* node)
+{
+	VPLists.push(list, (void*)node);
 }
 
 static DFANode* next(List* list)
@@ -101,6 +107,7 @@ const struct DFANodeLists DFANodeLists = {
 	.push = push,
 	.next = next,
 	.delAll = delAll,
+	.add = add,
 	.pop = pop,
 	.resetCursor = resetCursor
 	/*

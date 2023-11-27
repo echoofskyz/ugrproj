@@ -328,3 +328,21 @@
     links
   added a link direction indicator
 < Mon Nov 27 14:17:47 2023
+> Mon Nov 27 15:51:10 2023
+  added set start mode
+  -still getting unknown crash in node linking mode
+  added set ends mode
+  -getting another crash, the wrong node was toggled
+    just before, list issue?
+    definitly list issue, nodes appear to be popped from
+    the list instead of deleted?
+    clicking again after end node was removed from list
+    causes the crash
+  -should fix the list at some point, but also should just
+    have "end node" be a property of a node
+  changed "end nodes" to be property of a node,
+  this was easier, simpler, faster (to code), faster (to run),
+    better, made more sense, less crashy, less janky, took less space
+    in the code, and in memory at run time, ....
+  !I now have all of the state I need! ... probably ... hopefully .. maybe.
+< Mon Nov 27 16:30:09 2023

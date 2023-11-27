@@ -7,6 +7,7 @@
 struct DFANodeLists
 {
 	void (*push)(List*, int n, float x, float y);
+	void (*add)(List*, DFANode*);
 	DFANode* (*next)(List*);
 	void (*resetCursor)(List*);
 	void (*delAll)(List*);

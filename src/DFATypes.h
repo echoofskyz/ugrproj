@@ -8,6 +8,7 @@ typedef struct DFANode
 	float x;
 	float y;
 	int n;
+	int isAccept;
 } DFANode;
 
 typedef struct DFALink

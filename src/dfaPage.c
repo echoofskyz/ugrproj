@@ -14,7 +14,6 @@ static List DFALinks;
 static int init = 0;
 static int pageState;
 static DFANode* startNode;
-static List endNodes;
 static DFANode* linkOne;
 static DFALink* selectedLink;
 
@@ -22,8 +21,10 @@ static void freePage()
 {
 	CharLists.delAll(&testSeq);
 	DFANodeLists.delAll(&DFANodes);
-	DFANodeLists.delAll(&endNodes);
 	DFALinkLists.delAll(&DFALinks);
+	
+	//these should be freed when I clear the lists
+	// but not sure?
 	free(startNode);
 	free(linkOne);
 	free(selectedLink);
@@ -182,14 +183,28 @@ static void draw(Renderer* rend)
 	drawLinks(rend);
 	
 	//draw nodes
-	rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=0.5};
 	for (int i = 0; i < DFANodes.size; i++)
 	{
 		DFANode* node = DFANodeLists.next(&DFANodes);
 		
+		rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=0.5};
 		Renderers.circle(rend, node->x, node->y, 0.1, 1.0);
+		
+		if (node->isAccept)
+		{
+			rend->fillColor = (Color){.r=0.7, .g=0.2, .b=0.2, .a=1.0};
+			Renderers.circle(rend, node->x, node->y, 0.08, 1.0);
+		}
 	}
 	DFANodeLists.resetCursor(&DFANodes);
+	
+	
+	//draw start node
+	if (startNode)
+	{
+		rend->fillColor = (Color){.r=0.4, .g=1.0, .b=0.4, .a=1.0};
+		Renderers.circle(rend, startNode->x, startNode->y, 0.05, 1.0);
+	}
 	
 	drawButtons(rend);
 	drawTestSeqBox(rend);
@@ -293,6 +308,48 @@ static void leftClick(AppData* appdata, int action)
 			}
 			DFANodeLists.resetCursor(&DFANodes);
 		} 
+		
+		if (pageState == SETSTART)
+		{
+			for (int i = 0; i < DFANodes.size; i++)
+			{
+				DFANode* node = DFANodeLists.next(&DFANodes);
+								
+				if (dist(mouseX, mouseY,
+					node->x, node->y) < 0.1)
+				{
+					startNode = node;
+					break;
+				}
+			}
+			
+			DFANodeLists.resetCursor(&DFANodes);
+		}
+		
+		if (pageState == SETENDS)
+		{
+			for (int i = 0; i < DFANodes.size; i++)
+			{
+				DFANode* node = DFANodeLists.next(&DFANodes);
+								
+				if (dist(mouseX, mouseY,
+					node->x, node->y) < 0.1)
+				{
+					if (node->isAccept)
+					{
+						node->isAccept = 0;
+					}
+					else
+					{
+						node->isAccept = 1;
+					}
+					
+					break;
+				}
+			}
+			
+			DFANodeLists.resetCursor(&DFANodes);
+		}
 		
 		if (dist(mouseX, mouseY, -0.6, -0.9) < 0.1)
 		{
