@@ -9,6 +9,8 @@ struct DFANodeLists
 	void (*push)(List*, int n, float x, float y);
 	DFANode* (*next)(List*);
 	void (*resetCursor)(List*);
+	void (*delAll)(List*);
+	DFANode* (*pop)(List*);
 	/*
 	char (*pop)(List*);
 	char (*popFront)(List*);

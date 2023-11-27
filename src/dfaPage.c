@@ -21,6 +21,12 @@ static DFALink* selectedLink;
 static void freePage()
 {
 	CharLists.delAll(&testSeq);
+	DFANodeLists.delAll(&DFANodes);
+	DFANodeLists.delAll(&endNodes);
+	DFALinkLists.delAll(&DFALinks);
+	free(startNode);
+	free(linkOne);
+	free(selectedLink);
 }
 
 static void drawTestSeqBox(Renderer* rend)
@@ -97,8 +103,59 @@ static void drawButtons(Renderer* rend)
 	}
 }
 
-static void draw(Renderer* rend)
+static void drawLinks(Renderer* rend)
 {
+	rend->strokeColor = (Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
+	rend->strokeWeight = 0.005;
+	for (int i = 0; i < DFALinks.size; i++)
+	{
+		DFALink* link = DFALinkLists.next(&DFALinks);
+		char transString[link->transitions.size];
+		for (int n = 0; n < link->transitions.size; n++)
+		{
+			transString[n] = CharLists.next(&link->transitions);
+		}
+		CharLists.resetCursor(&link->transitions);
+		float mX = link->first->x - 
+			(link->first->x - link->second->x)/2.0;
+		
+		float mY = link->first->y - 
+			(link->first->y - link->second->y)/2.0;
+		
+		if (link->first->x < link->second->x - 0.2)
+		{
+			Renderers.text(rend, mX, mY+0.05,
+				0.6, transString, link->transitions.size);
+			Renderers.line(rend, mX-0.05, mY+0.055, mX-0.025, mY+0.04);
+			Renderers.line(rend, mX-0.05, mY+0.025, mX-0.025, mY+0.04);
+		}
+		else if (link->first->x > link->second->x + 0.2)
+		{
+			Renderers.text(rend, mX, mY-0.025,
+				0.6, transString, link->transitions.size);
+			Renderers.line(rend, mX-0.025, mY-0.055, mX-0.05, mY-0.04);
+			Renderers.line(rend, mX-0.025, mY-0.025, mX-0.05, mY-0.04);
+		}
+		else if (link->first->y > link->second->y) {
+			Renderers.text(rend, mX, mY+0.05,
+				0.6, transString, link->transitions.size);
+			Renderers.line(rend, mX-0.075, mY+0.055, mX-0.05, mY+0.04);
+			Renderers.line(rend, mX-0.025, mY+0.055, mX-0.05, mY+0.04);
+		}
+		else if (link->first->y < link->second->y) {
+			Renderers.text(rend, mX, mY-0.025,
+				0.6, transString, link->transitions.size);
+			Renderers.line(rend, mX-0.075, mY-0.055, mX-0.05, mY-0.04);
+			Renderers.line(rend, mX-0.025, mY-0.055, mX-0.05, mY-0.04);
+		}
+		Renderers.line(rend, link->first->x, link->first->y,
+			link->second->x, link->second->y);
+	}
+	DFALinkLists.resetCursor(&DFALinks);
+}
+
+static void draw(Renderer* rend)
+{	
 	if (init == 0) 
 	{
 		testSeq = newList;
@@ -113,32 +170,16 @@ static void draw(Renderer* rend)
 	{
 		linkOne = NULL;
 	}
+	if (pageState != WRITELINK)
+	{
+		selectedLink = NULL;
+	}
 	
 	//background
 	rend->fillColor = (Color){.r=0.7, .g=0.8, .b=0.7, .a=1.0};
 	Renderers.rect(rend, -1.0, 1.0, 2.0, 2.0);
 	
-	
-	//draw node links
-	rend->strokeColor = (Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
-	rend->strokeWeight = 0.005;
-	for (int i = 0; i < DFALinks.size; i++)
-	{
-		DFALink* link = DFALinkLists.next(&DFALinks);
-		
-		char transString[link->transitions.size];
-		for (int i = 0; i < link->transitions.size; i++)
-		{
-			transString[i] = CharLists.next(&link->transitions);
-		}
-		CharLists.resetCursor(&link->transitions);
-		
-		Renderers.line(rend, link->first->x, link->first->y,
-			link->second->x, link->second->y);
-		Renderers.text(rend, link->first->x, link->first->y,
-			0.6, transString, link->transitions.size);
-	}
-	DFALinkLists.resetCursor(&DFALinks);
+	drawLinks(rend);
 	
 	//draw nodes
 	rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=0.5};

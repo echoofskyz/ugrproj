@@ -22,14 +22,21 @@ static void resetCursor(List* list)
 	VPLists.resetCursor(list);
 }
 
-/*
-static char pop(List* list)
+static DFANode* pop(List* list)
 {
-	void* dataPtr = VPLists.pop(list);
-	char data = *(char*)dataPtr;
-	free(dataPtr);
-	return data;
+	return (DFANode*)VPLists.pop(list);
 }
+
+static void delAll(List* list)
+{
+	for (int i=list->size;i>0;i--) {
+		DFANode* ptr = DFANodeLists.pop(list);
+		free(ptr);
+	}
+}
+
+/*
+
 
 static char popFront(List* list)
 {
@@ -75,13 +82,6 @@ static void delNode(List* list, ListNode* node)
 	VPLists.delNode(list, node);
 }
 
-static void delAll(List* list)
-{
-	for (int i=list->size;i>0;i--) {
-		DFANodeLists.pop(list);
-	}
-}
-
 static void insert(List* list, char data, int index)
 {
 	char* dataPtr = malloc(sizeof(char));
@@ -100,6 +100,8 @@ static void set(List* list, int index, char data)
 const struct DFANodeLists DFANodeLists = {
 	.push = push,
 	.next = next,
+	.delAll = delAll,
+	.pop = pop,
 	.resetCursor = resetCursor
 	/*
 	.pop = pop,

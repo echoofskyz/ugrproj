@@ -3,6 +3,7 @@
 
 #include "List.h"
 #include "../DFATypes.h"
+#include "CharLists.h"
 
 struct DFALinkLists
 {
@@ -11,6 +12,8 @@ struct DFALinkLists
 	DFALink* (*peek)(List*);
 	void (*resetCursor)(List*);
 	void (*delNode)(List*, DFALink*);
+	void (*delAll)(List*);
+	DFALink* (*pop)(List*);
 	/*
 	char (*pop)(List*);
 	char (*popFront)(List*);

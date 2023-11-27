@@ -7,6 +7,7 @@ static void push(List* list, DFANode* one, DFANode* two)
 	DFALink* dataPtr = malloc(sizeof(DFALink));
 	dataPtr->first = one;
 	dataPtr->second = two;
+	dataPtr->transitions = newList;
 	VPLists.push(list, (void*)dataPtr);
 }
 
@@ -41,6 +42,20 @@ static void delNode(List* list, DFALink* node)
 static void resetCursor(List* list)
 {
 	VPLists.resetCursor(list);
+}
+
+static DFALink* pop(List* list)
+{
+	return (DFALink*)VPLists.pop(list);
+}
+
+static void delAll(List* list)
+{
+	for (int i=list->size;i>0;i--) {
+		DFALink* ptr = DFALinkLists.pop(list);
+		CharLists.delAll(&ptr->transitions);
+		free(ptr);
+	}
 }
 
 /*
@@ -109,12 +124,14 @@ static void set(List* list, int index, char data)
 
 const struct DFALinkLists DFALinkLists = {
 	.push = push,
+	.pop = pop,
 	.peek = peek,
+	.delAll = delAll,
 	.next = next,
 	.delNode = delNode,
 	.resetCursor = resetCursor
 	/*
-	.pop = pop,
+	
 	.popFront = popFront,
 	
 	.prev = prev,
@@ -122,7 +139,7 @@ const struct DFALinkLists DFALinkLists = {
 	
 	.pushFront = pushFront,
 	.del = del,
-	.delAll = delAll,
+	
 	.insert = insert,
 	.set = set,
 	
