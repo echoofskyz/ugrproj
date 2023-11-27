@@ -1,6 +1,8 @@
 #ifndef DFATYPES_H
 #define DFATYPES_H
 
+#include "./collections/List.h"
+
 typedef struct DFANode
 {
 	float x;
@@ -12,6 +14,7 @@ typedef struct DFALink
 {
 	DFANode* first;
 	DFANode* second;
+	List transitions;
 } DFALink;
 
 #endif

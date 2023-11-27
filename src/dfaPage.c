@@ -9,10 +9,13 @@
 static int btnDFAdown = 0;
 static List testSeq;
 static List DFANodes;
+static List DFALinks;
 static int init = 0;
 static int pageState;
 static DFANode* startNode;
 static List endNodes;
+static DFANode* linkOne;
+static DFALink* selectedLink;
 
 static void freePage()
 {
@@ -100,14 +103,33 @@ static void draw(Renderer* rend)
 		testSeq = newList;
 		DFANodes = newList;
 		pageState = EDITNODE;
+		DFALinks = newList;
 		
 		init = 1;
+	}
+	
+	if (pageState != LINKNODES)
+	{
+		linkOne = NULL;
 	}
 	
 	//background
 	rend->fillColor = (Color){.r=0.7, .g=0.8, .b=0.7, .a=1.0};
 	Renderers.rect(rend, -1.0, 1.0, 2.0, 2.0);
 	
+	
+	//draw node links
+	rend->strokeColor = (Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
+	rend->strokeWeight = 0.005;
+	for (int i = 0; i < DFALinks.size; i++)
+	{
+		DFALink* link = DFALinkLists.next(&DFALinks);
+		Renderers.line(rend, link->first->x, link->first->y,
+			link->second->x, link->second->y);
+	}
+	DFALinkLists.resetCursor(&DFALinks);
+	
+	//draw nodes
 	rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=0.5};
 	for (int i = 0; i < DFANodes.size; i++)
 	{
@@ -148,8 +170,7 @@ static void leftClick(AppData* appdata, int action)
 			for (int i = 0; i < DFANodes.size; i++)
 			{
 				DFANode* node = DFANodeLists.next(&DFANodes);
-
-				
+								
 				if (dist(mouseX, mouseY,
 					node->x, node->y) < 0.4)
 				{
@@ -167,23 +188,48 @@ static void leftClick(AppData* appdata, int action)
 			}
 		}
 		
-		if (dist(mouseX, mouseY, -0.6, -0.9) < 0.2)
+		if (pageState == LINKNODES)
+		{
+			for (int i = 0; i < DFANodes.size; i++)
+			{
+				DFANode* node = DFANodeLists.next(&DFANodes);
+
+				if (dist(mouseX, mouseY,
+					node->x, node->y) < 0.1)
+				{
+					if (linkOne == NULL)
+					{
+						linkOne = node;
+					} 
+					else if (node != linkOne)
+					{
+						DFALinkLists.push(&DFALinks, linkOne, node);
+						linkOne = NULL;
+					}
+					
+					break;
+				}
+			}
+			DFANodeLists.resetCursor(&DFANodes);
+		} 
+		
+		if (dist(mouseX, mouseY, -0.6, -0.9) < 0.1)
 		{
 			pageState = EDITNODE;
 		}
-		if (dist(mouseX, mouseY, -0.2, -0.9) < 0.2)
+		if (dist(mouseX, mouseY, -0.2, -0.9) < 0.1)
 		{
 			pageState = LINKNODES;
 		}
-		if (dist(mouseX, mouseY, 0.2, -0.9) < 0.2)
+		if (dist(mouseX, mouseY, 0.2, -0.9) < 0.1)
 		{
 			pageState = SETSTART;
 		}
-		if (dist(mouseX, mouseY, 0.6, -0.9) < 0.2)
+		if (dist(mouseX, mouseY, 0.6, -0.9) < 0.1)
 		{
 			pageState = SETENDS;
 		}
-		if (dist(mouseX, mouseY, 0.0, -0.8) < 0.2)
+		if (dist(mouseX, mouseY, 0.0, -0.8) < 0.1)
 		{
 			pageState = RUNNING;
 		}

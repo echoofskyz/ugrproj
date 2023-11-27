@@ -307,3 +307,10 @@
   -have to figure out how to handle state for entering text into the
     test seq bar vs entering text into a node link
 < Sun Nov 26 20:54:19 2023
+  -need to check on dist function/click detection, its not working right
+> Mon Nov 27 09:30:27 2023
+  fixed the dist function issue, was using button diameter instead of rad
+  worked on node link mode, got the nodes to link
+  - still need to put in directional arrow, and
+    do the whole text box/transitions thing
+< Mon Nov 27 10:11:48 2023

@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include "./collections/CharLists.h"
 #include "./collections/DFANodeLists.h"
+#include "./collections/DFALinkLists.h"
 #include "DFATypes.h"
 #include <math.h>
 

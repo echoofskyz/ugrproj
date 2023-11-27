@@ -2,6 +2,25 @@
 #include "DFALinkLists.h"
 #include <stdlib.h>
 
+static void push(List* list, DFANode* one, DFANode* two)
+{
+	DFALink* dataPtr = malloc(sizeof(DFALink));
+	dataPtr->first = one;
+	dataPtr->second = two;
+	VPLists.push(list, (void*)dataPtr);
+}
+
+static DFALink* next(List* list)
+{
+	return (DFALink*)VPLists.next(list);
+	
+}
+
+static void resetCursor(List* list)
+{
+	VPLists.resetCursor(list);
+}
+
 /*
 static char pop(List* list)
 {
@@ -19,12 +38,6 @@ static char popFront(List* list)
 	return data;
 }
 
-static char next(List* list)
-{
-	return *(char*)VPLists.next(list);
-	
-}
-
 static char prev(List* list)
 {
 	return *(char*)VPLists.prev(list);
@@ -35,12 +48,7 @@ static char get(List* list, int index)
 	return *(char*)VPLists.get(list, index);
 }
 
-static void push(List* list, char data)
-{
-	char* dataPtr = malloc(sizeof(char));
-	*dataPtr = data;
-	VPLists.push(list, (void*)dataPtr);
-}
+
 
 static void pushFront(List* list, char data)
 {
@@ -81,26 +89,24 @@ static void set(List* list, int index, char data)
 	*dataPtr = data;
 	VPLists.set(list, index, (void*)dataPtr);
 }
-
-static void resetCursor(List* list)
-{
-	VPLists.resetCursor(list);
-}
 */
 
 const struct DFALinkLists DFALinkLists = {
+	.push = push,
+	.next = next,
+	.resetCursor = resetCursor
 	/*
 	.pop = pop,
 	.popFront = popFront,
-	.next = next,
+	
 	.prev = prev,
 	.get = get,
-	.push = push,
+	
 	.pushFront = pushFront,
 	.del = del,
 	.delAll = delAll,
 	.insert = insert,
 	.set = set,
-	.resetCursor = resetCursor
+	
 	*/
 };
