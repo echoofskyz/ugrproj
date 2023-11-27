@@ -2,9 +2,10 @@
 
 #define EDITNODE 0
 #define LINKNODES 1
-#define SETSTART 2
-#define SETENDS 3
-#define RUNNING 4
+#define WRITELINK 2
+#define SETSTART 3
+#define SETENDS 4
+#define RUNNING 5
 
 static int btnDFAdown = 0;
 static List testSeq;
@@ -124,8 +125,18 @@ static void draw(Renderer* rend)
 	for (int i = 0; i < DFALinks.size; i++)
 	{
 		DFALink* link = DFALinkLists.next(&DFALinks);
+		
+		char transString[link->transitions.size];
+		for (int i = 0; i < link->transitions.size; i++)
+		{
+			transString[i] = CharLists.next(&link->transitions);
+		}
+		CharLists.resetCursor(&link->transitions);
+		
 		Renderers.line(rend, link->first->x, link->first->y,
 			link->second->x, link->second->y);
+		Renderers.text(rend, link->first->x, link->first->y,
+			0.6, transString, link->transitions.size);
 	}
 	DFALinkLists.resetCursor(&DFALinks);
 	
@@ -160,6 +171,15 @@ static void leftClick(AppData* appdata, int action)
 		if (pageState == RUNNING)
 		{
 			return;
+		}
+		
+		if (pageState == WRITELINK)
+		{
+			if (selectedLink->transitions.size == 0)
+			{
+				DFALinkLists.delNode(&DFALinks, selectedLink);
+			}
+			pageState = LINKNODES;
 		}
 		
 		if (pageState == EDITNODE
@@ -203,8 +223,28 @@ static void leftClick(AppData* appdata, int action)
 					} 
 					else if (node != linkOne)
 					{
-						DFALinkLists.push(&DFALinks, linkOne, node);
+						int foundLink = 0;
+						for (int n = 0; n < DFALinks.size; n++)
+						{
+							DFALink* link = DFALinkLists.next(&DFALinks);
+							if (link->first == linkOne 
+								&& link->second == node)
+							{
+								selectedLink = link;
+								foundLink = 1;
+								break;
+							}
+						}
+						DFALinkLists.resetCursor(&DFALinks);
+						
+						if (foundLink == 0)
+						{
+							DFALinkLists.push(&DFALinks, linkOne, node);
+							selectedLink = DFALinkLists.peek(&DFALinks);
+						}
+						
 						linkOne = NULL;
+						pageState = WRITELINK;
 					}
 					
 					break;
@@ -272,6 +312,26 @@ static void keyPress(AppData* appdata, int key, int action)
 {
 	if (action == GLFW_PRESS || action == GLFW_REPEAT) 
 	{
+		if (pageState == WRITELINK)
+		{
+			if (key == GLFW_KEY_BACKSPACE) {
+				CharLists.pop(&selectedLink->transitions);
+			}
+			else if (key == GLFW_KEY_ENTER)
+			{
+				if (selectedLink->transitions.size == 0)
+				{
+					DFALinkLists.delNode(&DFALinks, selectedLink);
+				}
+				pageState = LINKNODES;
+			}
+			else
+			{
+				CharLists.push(&selectedLink->transitions, (char)key);
+			}
+			return;
+		}
+		
 		if (key == GLFW_KEY_BACKSPACE) {
 			CharLists.pop(&testSeq);
 		}

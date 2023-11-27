@@ -8,7 +8,9 @@ struct DFALinkLists
 {
 	void (*push)(List*, DFANode*, DFANode*);
 	DFALink* (*next)(List*);
+	DFALink* (*peek)(List*);
 	void (*resetCursor)(List*);
+	void (*delNode)(List*, DFALink*);
 	/*
 	char (*pop)(List*);
 	char (*popFront)(List*);
@@ -18,7 +20,7 @@ struct DFALinkLists
 	
 	void (*pushFront)(List*, char);
 	void (*del)(List*, int);
-	void (*delNode)(List*, ListNode*);
+	
 	void (*delAll)(List*);
 	void (*insert)(List*, char, int);
 	void (*set)(List*, int, char);

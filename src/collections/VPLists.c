@@ -243,8 +243,14 @@ static void del(List* list, int index) {
 static void delNode(List* list, ListNode* node) {
 	// deletes a given node from the list
 	
-	node->prev->next = node->next;
-	node->next->prev = node->prev;
+	if (node->prev != NULL)
+	{
+		node->prev->next = node->next;
+	}
+	if (node->next != NULL)
+	{
+		node->next->prev = node->prev;
+	}
 	
 	free(node);
 	list->size--;
@@ -353,6 +359,7 @@ const struct VPLists VPLists = {
 	.pushFront = pushFront,
 	.del = del,
 	.delAll = delAll,
+	.delNode = delNode,
 	.insert = insert,
 	.set = set,
 	.resetCursor = resetCursor

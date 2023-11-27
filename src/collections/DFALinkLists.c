@@ -16,6 +16,28 @@ static DFALink* next(List* list)
 	
 }
 
+static DFALink* peek(List* list)
+{
+	return (DFALink*)list->tail->data;
+	
+}
+
+static void delNode(List* list, DFALink* node)
+{
+	ListNode* curs = list->head;
+	for (int i=0; i < list->size; i++)
+	{
+		if ((DFALink*)(curs->data) == node)
+		{
+			break;
+		}
+		curs = curs->next;
+	}
+	
+	free(curs->data);
+	VPLists.delNode(list, curs);
+}
+
 static void resetCursor(List* list)
 {
 	VPLists.resetCursor(list);
@@ -63,12 +85,6 @@ static void del(List* list, int index)
 	VPLists.del(list, index);
 }
 
-static void delNode(List* list, ListNode* node)
-{
-	free(node->data);
-	VPLists.delNode(list, node);
-}
-
 static void delAll(List* list)
 {
 	for (int i=list->size;i>0;i--) {
@@ -93,7 +109,9 @@ static void set(List* list, int index, char data)
 
 const struct DFALinkLists DFALinkLists = {
 	.push = push,
+	.peek = peek,
 	.next = next,
+	.delNode = delNode,
 	.resetCursor = resetCursor
 	/*
 	.pop = pop,
