@@ -294,3 +294,16 @@
   -weird graphical bug on my laptop
     DFA button text stays
 < Mon Nov 20 16:01:50 2023
+> Sun Nov 26 18:51:59 2023
+  moved draw test seq box to its own function
+  added DFANodeLists and DFATypes and DFALinkLists
+  added create node on click, doesn't allow nodes to be too close
+  started building menu buttons
+  -going to have link transitions be shown on the top if going from left
+    to right, and on bottom if going from right to left, just have them be
+    drawn right above/below midpoint of line, line gets half arrows on ends
+    to indicate direction
+  -have to add garbage collection for DFANodeLists
+  -have to figure out how to handle state for entering text into the
+    test seq bar vs entering text into a node link
+< Sun Nov 26 20:54:19 2023
