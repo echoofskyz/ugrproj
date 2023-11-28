@@ -8,7 +8,10 @@
 #define RUNNING 5
 
 static int INIT = 0;
-static int pageState;
+static int pageState = EDITNODE;
+static int frameCount = 0;
+static int lastAnim = 0;
+static int seqRejected = 0;
 
 static List testSeq;
 static List DFANodes;
@@ -17,6 +20,7 @@ static List DFALinks;
 static DFANode* startNode;
 static DFANode* linkOne;
 static DFALink* selectedLink;
+static DFANode* runningNode;
 
 static int initPage()
 {
@@ -225,8 +229,78 @@ static void draw(Renderer* rend)
 		Renderers.circle(rend, startNode->x, startNode->y, 0.05, 1.0);
 	}
 	
+	//draw running mode
+	if (pageState == RUNNING && !startNode) pageState = EDITNODE;
+	if (pageState == RUNNING )
+	{
+		if (!runningNode) runningNode = startNode;
+		
+		rend->fillColor = (Color){.r=0.7, .g=1.0, .b=0.7, .a=1.0};
+		Renderers.circle(rend, runningNode->x, runningNode->y, 0.12, 1.0);
+		
+		if (testSeq.size == 0)
+		{
+			rend->strokeWeight = 0.02;
+			if (runningNode->isAccept && !seqRejected)
+			{
+				rend->strokeColor = (Color){.r=0.0, .g=1.0, .b=0.0, .a=1.0};
+				Renderers.text(rend, -0.8, 0.8,
+					2.0, "SEQUENCE\nACCEPTED", 17);
+			}
+			else
+			{
+				rend->strokeColor = (Color){.r=1.0, .g=0.0, .b=0.0, .a=1.0};
+				Renderers.text(rend, -0.8, 0.8,
+					2.0, "SEQUENCE\nREJECTED", 17);
+			}
+		}
+		else
+		{	
+			if (lastAnim > 30)
+			{
+				char currentSymbol = CharLists.popFront(&testSeq);
+				int hasTrans = 0;
+				for (int i=0;i<DFALinks.size;i++)
+				{
+					DFALink* link = DFALinkLists.next(&DFALinks);
+					DFANode* node = link->first;
+					
+					if (node == runningNode)
+					{
+						List* transList = &link->transitions;
+						for (int n=0;n<transList->size;n++)
+						{
+							if (CharLists.next(transList) == currentSymbol)
+							{
+								putchar(currentSymbol);
+								hasTrans = 1;
+								runningNode = link->second;
+								break;
+							}
+						}
+						CharLists.resetCursor(transList);
+					}
+					
+					if (hasTrans) break;
+				}
+				DFALinkLists.resetCursor(&DFALinks);
+				
+				if (!hasTrans)
+				{
+					CharLists.delAll(&testSeq);
+					seqRejected = 1;
+				}
+				
+				lastAnim = 0;
+			}
+			lastAnim++;
+		}
+	}
+	
 	drawButtons(rend);
 	drawTestSeqBox(rend);
+	
+	frameCount++;
 }
 
 static float dist(float x1, float y1, float x2, float y2)
@@ -245,7 +319,9 @@ static void leftClick(AppData* appdata, int action)
 		
 		if (pageState == RUNNING)
 		{
-			return;
+			runningNode = NULL;
+			pageState = EDITNODE;
+			seqRejected = 0;
 		}
 		
 		if (pageState == WRITELINK)
@@ -429,6 +505,15 @@ static void keyPress(AppData* appdata, int key, int action)
 {
 	if (action == GLFW_PRESS || action == GLFW_REPEAT) 
 	{
+		if (pageState == RUNNING)
+		{
+			runningNode = NULL;
+			pageState = EDITNODE;
+			seqRejected = 0;
+			lastAnim = 0;
+			return;
+		}
+		
 		if (pageState == WRITELINK)
 		{
 			if (key == GLFW_KEY_BACKSPACE) {

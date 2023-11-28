@@ -12,6 +12,7 @@
 GLFWwindow* window;
 Renderer renderer;
 AppData appData;
+static float maxFPS = 30.0;
 
 static void key_callback(GLFWwindow* window,
 		int key, int scancode, int action, int mods) 
@@ -124,12 +125,18 @@ int main(void)
 	
 	while (!glfwWindowShouldClose(window))
 	{
-		glClearColor(0.5f, 0.3f, 0.3f, 0.1f);
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		
-		appData.currentPage.draw(&renderer);
+		if (glfwGetTime() > 1.0/maxFPS)
+		{
+			glClearColor(0.5f, 0.3f, 0.3f, 0.1f);
+			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+			
+			appData.currentPage.draw(&renderer);
 
-		glfwSwapBuffers(window);
+			glfwSwapBuffers(window);
+			
+			glfwSetTime(0.0);
+		}
+		
 		glfwPollEvents();
 	}
 	

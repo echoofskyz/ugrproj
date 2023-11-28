@@ -364,3 +364,11 @@
   stared at the code for a while and contemplated how to make it less
     shitty
 < Mon Nov 27 21:17:06 2023
+> Tue Nov 28 07:05:06 2023
+  wrote a prototype for the accept/reject turtle
+  accidently set the first node in the link as the new node
+    literally does nothing
+  :< was drawing the wrong node, was why it wasn't moving
+  ITS ALIVE!
+< Tue Nov 28 08:31:15 2023
+
