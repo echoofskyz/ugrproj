@@ -49,6 +49,7 @@
 
  ### Linux
   run
+  `sudo apt install libglfw3`
   `chmod +x ./app`
   `./app`
 

@@ -380,4 +380,8 @@
   --probably should still statically link both libglfw and glibc
   got windows compiling to work again
 < Tue Nov 28 16:44:13 2023
+> Tue Nov 28 17:06:56 2023
+  made the selected node release when leaving linking mode
+  added Default state
+< Tue Nov 28 17:24:10 2023
 

@@ -1,14 +1,15 @@
 #include "dfaPage.h"
 
-#define EDITNODE 0
-#define LINKNODES 1
-#define WRITELINK 2
-#define SETSTART 3
-#define SETENDS 4
-#define RUNNING 5
+#define DEFAULT 0
+#define EDITNODE 1
+#define LINKNODES 2
+#define WRITELINK 3
+#define SETSTART 4
+#define SETENDS 5
+#define RUNNING 6
 
 static int INIT = 0;
-static int pageState = EDITNODE;
+static int pageState = DEFAULT;
 static int frameCount = 0;
 static int lastAnim = 0;
 static int seqRejected = 0;
@@ -26,7 +27,6 @@ static int initPage()
 {
 	testSeq = newList;
 	DFANodes = newList;
-	pageState = EDITNODE;
 	DFALinks = newList;
 	
 	return 1;
@@ -97,7 +97,7 @@ static void drawButtons(Renderer* rend)
 	
 	Renderers.circle(rend, -0.2, -0.9, 0.1, 3.0);
 	Renderers.text(rend, -0.28, -0.85, 0.6, "Link\nNodes", 10);
-	if (pageState == LINKNODES)
+	if (pageState == LINKNODES || pageState == WRITELINK)
 	{
 		Renderers.circle(rend, -0.2, -0.75, 0.04, 3.0);
 	}
@@ -195,17 +195,17 @@ static void draw(Renderer* rend)
 {	
 	if (INIT == 0) INIT = initPage();
 	
-	/* uncomment if I bugged somewhere
-	  and want a banadid for the booboo
+	//releases selected node when not in linking mode
 	if (pageState != LINKNODES)
 	{
 		linkOne = NULL;
 	}
+	
+
 	if (pageState != WRITELINK)
 	{
 		selectedLink = NULL;
 	}
-	*/
 	
 	//background
 	rend->fillColor = (Color){.r=0.7, .g=0.8, .b=0.7, .a=1.0};
@@ -230,7 +230,7 @@ static void draw(Renderer* rend)
 	}
 	
 	//draw running mode
-	if (pageState == RUNNING && !startNode) pageState = EDITNODE;
+	if (pageState == RUNNING && !startNode) pageState = DEFAULT;
 	if (pageState == RUNNING )
 	{
 		if (!runningNode) runningNode = startNode;
@@ -320,7 +320,7 @@ static void leftClick(AppData* appdata, int action)
 		if (pageState == RUNNING)
 		{
 			runningNode = NULL;
-			pageState = EDITNODE;
+			pageState = DEFAULT;
 			seqRejected = 0;
 		}
 		
@@ -513,7 +513,7 @@ static void keyPress(AppData* appdata, int key, int action)
 		if (pageState == RUNNING)
 		{
 			runningNode = NULL;
-			pageState = EDITNODE;
+			pageState = DEFAULT;
 			seqRejected = 0;
 			lastAnim = 0;
 			return;
