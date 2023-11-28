@@ -27,6 +27,11 @@ static void key_callback(GLFWwindow* window,
 	}
 }
 
+static void error_callback(int id, const char* description)
+{
+	printf("%d, %s\r\n", id, description);
+}
+
 static void resize_callback(GLFWwindow* window,
 		int width, int height)
 {
@@ -54,17 +59,20 @@ static void initWindow()
 {
 	// initialize window
 	
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 	// basically fullscreen mode, no title bar, no resize
 	//glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 	
 	//glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
 	
-	window = glfwCreateWindow(640, 480, "TEST WORDS", NULL, NULL);
+	window = glfwCreateWindow(640, 480, "DFA Modeler", NULL, NULL);
 }
 
 static int init()
 {
+	glfwSetErrorCallback(&error_callback);
+	
 	if (!glfwInit())
 	{
 		printf("Failed to initialize GLFW\n");

@@ -14,7 +14,7 @@ build_win_console: clean
 	
 build_linux: clean
 	@echo "Building for Linux."
-	@gcc -o ./build/app ${SOURCE_FILES} -I./include_linux -I./include -lGL -lglfw -lrt -lm -ldl -lX11
+	@gcc -o ./build/app ${SOURCE_FILES} -I./include_linux -I./include -L./lib_linux -lGL -lglfw3 -lrt -lm -ldl -lX11
 	
 test_all: test_VPLists
 

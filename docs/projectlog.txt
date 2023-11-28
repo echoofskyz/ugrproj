@@ -371,4 +371,13 @@
   :< was drawing the wrong node, was why it wasn't moving
   ITS ALIVE!
 < Tue Nov 28 08:31:15 2023
+> Tue Nov 28 14:20:08 2023
+  making the key handler not register the win key as w
+  got it to run in WSL, but needed to install libglwf3
+  --need to figure out how to get docker image to automatically
+    install libglwf3-dev, or statically link it
+  figured out how to get docker to install libglwf3-dev
+  --probably should still statically link both libglfw and glibc
+  got windows compiling to work again
+< Tue Nov 28 16:44:13 2023
 

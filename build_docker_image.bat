@@ -1,1 +1,1 @@
-docker build -t ur_projv2 .
+docker build -t ur_projv5 .

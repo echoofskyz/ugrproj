@@ -503,6 +503,11 @@ static void click(AppData* appdata, int button, int action)
 
 static void keyPress(AppData* appdata, int key, int action)
 {
+	printf("KEY PRESSED: %c, %d\n", key, key);
+	
+	//this makes it not accept the windows key as w
+	if (key == GLFW_KEY_LEFT_SUPER) return;
+	
 	if (action == GLFW_PRESS || action == GLFW_REPEAT) 
 	{
 		if (pageState == RUNNING)
