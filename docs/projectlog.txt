@@ -349,3 +349,18 @@
 > Mon Nov 27 18:20:08 2023
   now draw selected node when linking
 < Mon Nov 27 18:24:13 2023
+> Mon Nov 27 19:33:50 2023
+  started cleaning, removed copied variable btnDFAdown
+    from dfaPage
+  linking crash seems to happen after creating a link then
+    starting, but not entering text into another, then creating
+    a new link 
+  fixed the crash! VPLists.delNode was wrong, didn't account for edge cases
+  	I basically just had it call other things that account for edge cases
+  	on edge cases
+  moved some stuff around and reformatted things in dfaPage
+  added toChrPtr method to CharLists
+  replaced some loops with CharLists.toChrPtr
+  stared at the code for a while and contemplated how to make it less
+    shitty
+< Mon Nov 27 21:17:06 2023

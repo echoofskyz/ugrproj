@@ -7,33 +7,38 @@
 #define SETENDS 4
 #define RUNNING 5
 
-static int btnDFAdown = 0;
+static int INIT = 0;
+static int pageState;
+
 static List testSeq;
 static List DFANodes;
 static List DFALinks;
-static int init = 0;
-static int pageState;
+
 static DFANode* startNode;
 static DFANode* linkOne;
 static DFALink* selectedLink;
+
+static int initPage()
+{
+	testSeq = newList;
+	DFANodes = newList;
+	pageState = EDITNODE;
+	DFALinks = newList;
+	
+	return 1;
+}
 
 static void freePage()
 {
 	CharLists.delAll(&testSeq);
 	DFANodeLists.delAll(&DFANodes);
 	DFALinkLists.delAll(&DFALinks);
-	
-	//these should be freed when I clear the lists
-	// but not sure?
-	free(startNode);
-	free(linkOne);
-	free(selectedLink);
 }
 
 static void drawTestSeqBox(Renderer* rend)
 {
 
-	char testSeqStr[testSeq.size];
+	/*char testSeqStr[testSeq.size];
 	
 	for (int i = 0; i < testSeq.size; i++)
 	{
@@ -41,6 +46,9 @@ static void drawTestSeqBox(Renderer* rend)
 	}
 	
 	CharLists.resetCursor(&testSeq);
+	*/
+	
+	char* testSeqStr = CharLists.toChrPtr(&testSeq);
 	
 	//test seq box background
 	rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=1.0};
@@ -59,6 +67,8 @@ static void drawTestSeqBox(Renderer* rend)
 	rend->strokeColor = (Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
 	rend->strokeWeight = 0.02;
 	Renderers.text(rend, -0.95, 0.96, 2.0, testSeqStr, testSeq.size);
+	
+	free(testSeqStr);
 }
 
 static void drawButtons(Renderer* rend)
@@ -108,21 +118,19 @@ static void drawLinks(Renderer* rend)
 {
 	rend->strokeColor = (Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
 	rend->strokeWeight = 0.005;
+	
 	for (int i = 0; i < DFALinks.size; i++)
 	{
 		DFALink* link = DFALinkLists.next(&DFALinks);
-		char transString[link->transitions.size];
-		for (int n = 0; n < link->transitions.size; n++)
-		{
-			transString[n] = CharLists.next(&link->transitions);
-		}
-		CharLists.resetCursor(&link->transitions);
+		char* transString = CharLists.toChrPtr(&link->transitions);
+		
+		//find link midpoint
 		float mX = link->first->x - 
 			(link->first->x - link->second->x)/2.0;
-		
 		float mY = link->first->y - 
 			(link->first->y - link->second->y)/2.0;
 		
+		//write link text and direction
 		if (link->first->x < link->second->x - 0.2)
 		{
 			Renderers.text(rend, mX, mY+0.05,
@@ -149,24 +157,42 @@ static void drawLinks(Renderer* rend)
 			Renderers.line(rend, mX-0.075, mY-0.055, mX-0.05, mY-0.04);
 			Renderers.line(rend, mX-0.025, mY-0.055, mX-0.05, mY-0.04);
 		}
+		
+		//draw link line
 		Renderers.line(rend, link->first->x, link->first->y,
 			link->second->x, link->second->y);
+			
+		free(transString);
 	}
 	DFALinkLists.resetCursor(&DFALinks);
 }
 
+static void drawNodes(Renderer* rend)
+{
+	for (int i = 0; i < DFANodes.size; i++)
+	{
+		DFANode* node = DFANodeLists.next(&DFANodes);
+		
+		rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=0.5};
+		Renderers.circle(rend, node->x, node->y, 0.1, 1.0);
+		
+		if (node->isAccept)
+		{
+			rend->fillColor = (Color){.r=0.7, .g=0.2, .b=0.2, .a=1.0};
+			Renderers.circle(rend, node->x, node->y, 0.08, 1.0);
+		}
+
+	}
+
+	DFANodeLists.resetCursor(&DFANodes);
+}
+
 static void draw(Renderer* rend)
 {	
-	if (init == 0) 
-	{
-		testSeq = newList;
-		DFANodes = newList;
-		pageState = EDITNODE;
-		DFALinks = newList;
-		
-		init = 1;
-	}
+	if (INIT == 0) INIT = initPage();
 	
+	/* uncomment if I bugged somewhere
+	  and want a banadid for the booboo
 	if (pageState != LINKNODES)
 	{
 		linkOne = NULL;
@@ -175,6 +201,7 @@ static void draw(Renderer* rend)
 	{
 		selectedLink = NULL;
 	}
+	*/
 	
 	//background
 	rend->fillColor = (Color){.r=0.7, .g=0.8, .b=0.7, .a=1.0};
@@ -189,22 +216,7 @@ static void draw(Renderer* rend)
 		Renderers.circle(rend, linkOne->x, linkOne->y, 0.11, 1.0);
 	}
 	
-	//draw nodes
-	for (int i = 0; i < DFANodes.size; i++)
-	{
-		DFANode* node = DFANodeLists.next(&DFANodes);
-		
-		rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=0.5};
-		Renderers.circle(rend, node->x, node->y, 0.1, 1.0);
-		
-		if (node->isAccept)
-		{
-			rend->fillColor = (Color){.r=0.7, .g=0.2, .b=0.2, .a=1.0};
-			Renderers.circle(rend, node->x, node->y, 0.08, 1.0);
-		}
-	}
-	DFANodeLists.resetCursor(&DFANodes);
-	
+	drawNodes(rend);
 	
 	//draw start node
 	if (startNode)
@@ -241,6 +253,7 @@ static void leftClick(AppData* appdata, int action)
 			if (selectedLink->transitions.size == 0)
 			{
 				DFALinkLists.delNode(&DFALinks, selectedLink);
+				selectedLink = NULL;
 			}
 			pageState = LINKNODES;
 		}
@@ -382,7 +395,6 @@ static void leftClick(AppData* appdata, int action)
 	else if (action == GLFW_RELEASE)
 	{
 		printf("LEFT RELEASED AT: %f, %f\n", mouseX, mouseY);
-		btnDFAdown = 0;
 	}
 }
 
@@ -427,6 +439,7 @@ static void keyPress(AppData* appdata, int key, int action)
 				if (selectedLink->transitions.size == 0)
 				{
 					DFALinkLists.delNode(&DFALinks, selectedLink);
+					selectedLink = NULL;
 				}
 				pageState = LINKNODES;
 			}

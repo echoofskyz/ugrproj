@@ -2,6 +2,7 @@
 
 #include "VPLists.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 static void* pop(List* list) {
 	// pops element from back of listy
@@ -242,15 +243,18 @@ static void del(List* list, int index) {
 
 static void delNode(List* list, ListNode* node) {
 	// deletes a given node from the list
+	if (node == list->tail) {
+		VPLists.pop(list);
+		return;
+	}
 	
-	if (node->prev != NULL)
-	{
-		node->prev->next = node->next;
+	if (node == list->head) {
+		VPLists.popFront(list);
+		return;
 	}
-	if (node->next != NULL)
-	{
-		node->next->prev = node->prev;
-	}
+	
+	node->prev->next = node->next;
+	node->next->prev = node->prev;
 	
 	free(node);
 	list->size--;
@@ -343,9 +347,9 @@ static void set(List* list, int index, void* data) {
 	n->data = data;
 }
 
-static void resetCursor(List* list) {
-	// resets the cursor
-	
+static void resetCursor(List* list)
+{
+	// resets the cursor	
 	list->cursor = NULL;
 }
 

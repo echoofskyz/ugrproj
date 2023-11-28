@@ -9,6 +9,7 @@ struct CharLists {
 	char (*next)(List*);
 	char (*prev)(List*);
 	char (*get)(List*, int);
+	char* (*toChrPtr)(List*);
 	void (*push)(List*, char);
 	void (*pushFront)(List*, char);
 	void (*del)(List*, int);

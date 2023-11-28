@@ -4,10 +4,17 @@
 
 static char pop(List* list)
 {
-	void* dataPtr = VPLists.pop(list);
-	char data = *(char*)dataPtr;
-	free(dataPtr);
-	return data;
+	if (list->size > 0)
+	{
+		void* dataPtr = VPLists.pop(list);
+		char data = *(char*)dataPtr;
+		free(dataPtr);
+		return data;
+	}
+	else
+	{
+		return '\0';
+	}
 }
 
 static char popFront(List* list)
@@ -32,6 +39,23 @@ static char prev(List* list)
 static char get(List* list, int index)
 {
 	return *(char*)VPLists.get(list, index);
+}
+
+static char* toChrPtr(List* list)
+{
+		char* chrPtr = malloc(list->size*sizeof(char));
+		
+		ListNode* oldCursor = list->cursor;
+		CharLists.resetCursor(list);
+		
+		for (int n=0;n<list->size;n++)
+		{
+			chrPtr[n] = CharLists.next(list);
+		}
+		
+		list->cursor = oldCursor;
+		
+		return chrPtr;
 }
 
 static void push(List* list, char data)
@@ -89,6 +113,7 @@ static void resetCursor(List* list)
 const struct CharLists CharLists = {
 	.pop = pop,
 	.popFront = popFront,
+	.toChrPtr = toChrPtr,
 	.next = next,
 	.prev = prev,
 	.get = get,

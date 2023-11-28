@@ -30,13 +30,13 @@ static void delNode(List* list, DFALink* node)
 	{
 		if ((DFALink*)(curs->data) == node)
 		{
-			break;
+			free(curs->data);
+			CharLists.delAll(&node->transitions);
+			VPLists.delNode(list, curs);
+			return;
 		}
 		curs = curs->next;
 	}
-	
-	free(curs->data);
-	VPLists.delNode(list, curs);
 }
 
 static void resetCursor(List* list)
