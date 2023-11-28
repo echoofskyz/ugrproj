@@ -346,3 +346,6 @@
     in the code, and in memory at run time, ....
   !I now have all of the state I need! ... probably ... hopefully .. maybe.
 < Mon Nov 27 16:30:09 2023
+> Mon Nov 27 18:20:08 2023
+  now draw selected node when linking
+< Mon Nov 27 18:24:13 2023

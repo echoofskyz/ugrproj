@@ -182,6 +182,13 @@ static void draw(Renderer* rend)
 	
 	drawLinks(rend);
 	
+	//draw selected node for link mode
+	if (linkOne)
+	{
+		rend->fillColor = (Color){.r=1.0, .g=1.0, .b=1.0, .a=0.25};
+		Renderers.circle(rend, linkOne->x, linkOne->y, 0.11, 1.0);
+	}
+	
 	//draw nodes
 	for (int i = 0; i < DFANodes.size; i++)
 	{
