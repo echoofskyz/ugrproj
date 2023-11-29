@@ -41,6 +41,21 @@ static void delAll(List* list)
 	}
 }
 
+static void delNode(List* list, DFANode* node)
+{
+	ListNode* curs = list->head;
+	for (int i=0; i < list->size; i++)
+	{
+		if ((DFANode*)(curs->data) == node)
+		{
+			free(curs->data);
+			VPLists.delNode(list, curs);
+			return;
+		}
+		curs = curs->next;
+	}
+}
+
 /*
 
 
@@ -108,6 +123,7 @@ const struct DFANodeLists DFANodeLists = {
 	.next = next,
 	.delAll = delAll,
 	.add = add,
+	.delNode = delNode,
 	.pop = pop,
 	.resetCursor = resetCursor
 	/*

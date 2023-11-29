@@ -11,6 +11,7 @@ struct DFANodeLists
 	DFANode* (*next)(List*);
 	void (*resetCursor)(List*);
 	void (*delAll)(List*);
+	void (*delNode)(List*, DFANode*);
 	DFANode* (*pop)(List*);
 	/*
 	char (*pop)(List*);

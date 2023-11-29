@@ -5,7 +5,8 @@
 > Mon May 15 18:29:16 2023
   work on docker container
   using: https://www.makeuseof.com/run-ubuntu-as-docker-container/
-  --should make it so that I execute something to open docker-ubuntu shell
+  --should make it so that I execute something to
+    open docker-ubuntu shell
     where I use make to compile my stuff
 < Mon May 15 19:11:31 2023
 > Tue May 16 11:44:42 2023
@@ -269,7 +270,8 @@
 < Thu Nov  9 16:58:35 2023
 > Fri Nov 10 15:18:30 2023
   imported List/VPLists to dfaPage
-  assigned char pointer index to derefrence of char pointer pointer
+  assigned char pointer index to derefrence
+    of char pointer pointer
   hurt myself trying to cast pointers
   tried to set up DFA test sequence variable
   todo: make CharLists
@@ -279,8 +281,8 @@
 > Sat Nov 11 14:35:28 2023
   created CharLists, basically a bunch of wrapper
     functions for VPLists that allow for storing chars
-  -still need to add on terminate function to Page, CharList needs
-    to be free'd
+  -still need to add on terminate function to
+    Page, CharList needs to be free'd
 < Sat Nov 11 15:04:26 2023
 > Sun Nov 12 15:18:39 2023
   added Page.free()
@@ -297,19 +299,26 @@
 > Sun Nov 26 18:51:59 2023
   moved draw test seq box to its own function
   added DFANodeLists and DFATypes and DFALinkLists
-  added create node on click, doesn't allow nodes to be too close
+  added create node on click, doesn't allow
+  nodes to be too close
   started building menu buttons
-  -going to have link transitions be shown on the top if going from left
-    to right, and on bottom if going from right to left, just have them be
-    drawn right above/below midpoint of line, line gets half arrows on ends
+  -going to have link transitions be shown on
+    the top if going from left
+    to right, and on bottom if going from right to left,
+    just have them be
+    drawn right above/below midpoint of line, line
+    gets half arrows on ends
     to indicate direction
   -have to add garbage collection for DFANodeLists
-  -have to figure out how to handle state for entering text into the
+  -have to figure out how to handle state for
+    entering text into the
     test seq bar vs entering text into a node link
 < Sun Nov 26 20:54:19 2023
-  -need to check on dist function/click detection, its not working right
+  -need to check on dist function/click detection,
+    its not working right
 > Mon Nov 27 09:30:27 2023
-  fixed the dist function issue, was using button diameter instead of rad
+  fixed the dist function issue, was using
+    button diameter instead of rad
   worked on node link mode, got the nodes to link
   - still need to put in directional arrow, and
     do the whole text box/transitions thing
@@ -342,9 +351,11 @@
     have "end node" be a property of a node
   changed "end nodes" to be property of a node,
   this was easier, simpler, faster (to code), faster (to run),
-    better, made more sense, less crashy, less janky, took less space
-    in the code, and in memory at run time, ....
-  !I now have all of the state I need! ... probably ... hopefully .. maybe.
+    better, made more sense, less crashy, less janky,
+    took less space in the code, and in memory
+    at run time, ....
+  !I now have all of the state I need! ... probably ... 
+    hopefully .. maybe.
 < Mon Nov 27 16:30:09 2023
 > Mon Nov 27 18:20:08 2023
   now draw selected node when linking
@@ -355,14 +366,15 @@
   linking crash seems to happen after creating a link then
     starting, but not entering text into another, then creating
     a new link 
-  fixed the crash! VPLists.delNode was wrong, didn't account for edge cases
-  	I basically just had it call other things that account for edge cases
-  	on edge cases
+  fixed the crash! VPLists.delNode was wrong,
+    didn't account for edge cases
+    I basically just had it call other things that
+    account for edge cases on edge cases
   moved some stuff around and reformatted things in dfaPage
   added toChrPtr method to CharLists
   replaced some loops with CharLists.toChrPtr
-  stared at the code for a while and contemplated how to make it less
-    shitty
+  stared at the code for a while and contemplated how to
+    make it less shitty
 < Mon Nov 27 21:17:06 2023
 > Tue Nov 28 07:05:06 2023
   wrote a prototype for the accept/reject turtle
@@ -377,7 +389,8 @@
   --need to figure out how to get docker image to automatically
     install libglwf3-dev, or statically link it
   figured out how to get docker to install libglwf3-dev
-  --probably should still statically link both libglfw and glibc
+  --probably should still statically link
+    both libglfw and glibc
   got windows compiling to work again
 < Tue Nov 28 16:44:13 2023
 > Tue Nov 28 17:06:56 2023
@@ -390,4 +403,12 @@
   pruned old logging
   renamed SETENDS SETACCEPT
 < Tue Nov 28 20:22:12 2023
+> Wed Nov 29 07:24:43 2023
+  split lines that were too long
+  made nodes deleteable in edit mode
+    -sometimes the links stay?
+  still getting graphical errors with text, dont
+    think its anything with lines?
+    --only on laptop
+< Wed Nov 29 07:50:04 2023
 

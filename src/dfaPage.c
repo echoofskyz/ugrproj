@@ -54,12 +54,15 @@ static void drawTestSeqBox(Renderer* rend)
 	Renderers.circle(rend, 0.9, 0.9, 0.09, 3.0);
 	
 	//test seq text
-	// might want to be able to scroll around based on what transition is
+	// might want to be able to scroll around 
+	// based on what transition is
 	// being run and when the text overflows
 	//  overflows at 16 characters
-	rend->strokeColor = (Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
+	rend->strokeColor = 
+		(Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
 	rend->strokeWeight = 0.02;
-	Renderers.text(rend, -0.95, 0.96, 2.0, testSeqStr, testSeq.size);
+	Renderers.text(rend, -0.95, 0.96, 
+		2.0, testSeqStr, testSeq.size);
 	
 	free(testSeqStr);
 }
@@ -67,7 +70,8 @@ static void drawTestSeqBox(Renderer* rend)
 static void drawButtons(Renderer* rend)
 {
 	rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=1.0};
-	rend->strokeColor = (Color){.r=0.9, .g=1.0, .b=0.9, .a=1.0};
+	rend->strokeColor = 
+		(Color){.r=0.9, .g=1.0, .b=0.9, .a=1.0};
 	rend->strokeWeight = 0.01;
 	
 	Renderers.circle(rend, 0.6, -0.9, 0.1, 3.0);
@@ -100,7 +104,8 @@ static void drawButtons(Renderer* rend)
 	
 	Renderers.circle(rend, 0.0, -0.8, 0.1, 3.0);
 	rend->fillColor = (Color){.r=0.2, .g=1.0, .b=0.2, .a=1.0};
-	Renderers.triangle(rend, -0.02, -0.77, -0.02, -0.83, 0.02, -0.8);
+	Renderers.triangle(rend, -0.02, -0.77, 
+		-0.02, -0.83, 0.02, -0.8);
 	if (pageState == RUNNING)
 	{
 		Renderers.circle(rend, 0.0, -0.8, 0.05, 3.0);
@@ -109,13 +114,15 @@ static void drawButtons(Renderer* rend)
 
 static void drawLinks(Renderer* rend)
 {
-	rend->strokeColor = (Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
+	rend->strokeColor = 
+		(Color){.r=0.0, .g=0.0, .b=0.0, .a=1.0};
 	rend->strokeWeight = 0.005;
 	
 	for (int i = 0; i < DFALinks.size; i++)
 	{
 		DFALink* link = DFALinkLists.next(&DFALinks);
-		char* transString = CharLists.toChrPtr(&link->transitions);
+		char* transString = CharLists.toChrPtr(
+			&link->transitions);
 		
 		//find link midpoint
 		float mX = link->first->x - 
@@ -128,32 +135,41 @@ static void drawLinks(Renderer* rend)
 		{
 			Renderers.text(rend, mX, mY+0.05,
 				0.6, transString, link->transitions.size);
-			Renderers.line(rend, mX-0.05, mY+0.055, mX-0.025, mY+0.04);
-			Renderers.line(rend, mX-0.05, mY+0.025, mX-0.025, mY+0.04);
+			Renderers.line(rend, mX-0.05, mY+0.055, 
+				mX-0.025, mY+0.04);
+			Renderers.line(rend, mX-0.05, mY+0.025, 
+				mX-0.025, mY+0.04);
 		}
 		else if (link->first->x > link->second->x + 0.2)
 		{
 			Renderers.text(rend, mX, mY-0.025,
 				0.6, transString, link->transitions.size);
-			Renderers.line(rend, mX-0.025, mY-0.055, mX-0.05, mY-0.04);
-			Renderers.line(rend, mX-0.025, mY-0.025, mX-0.05, mY-0.04);
+			Renderers.line(rend, mX-0.025, mY-0.055, 
+				mX-0.05, mY-0.04);
+			Renderers.line(rend, mX-0.025, mY-0.025, 
+				mX-0.05, mY-0.04);
 		}
 		else if (link->first->y > link->second->y) {
 			Renderers.text(rend, mX, mY+0.05,
 				0.6, transString, link->transitions.size);
-			Renderers.line(rend, mX-0.075, mY+0.055, mX-0.05, mY+0.04);
-			Renderers.line(rend, mX-0.025, mY+0.055, mX-0.05, mY+0.04);
+			Renderers.line(rend, mX-0.075, mY+0.055, 
+				mX-0.05, mY+0.04);
+			Renderers.line(rend, mX-0.025, mY+0.055, 
+				mX-0.05, mY+0.04);
 		}
 		else if (link->first->y < link->second->y) {
 			Renderers.text(rend, mX, mY-0.025,
 				0.6, transString, link->transitions.size);
-			Renderers.line(rend, mX-0.075, mY-0.055, mX-0.05, mY-0.04);
-			Renderers.line(rend, mX-0.025, mY-0.055, mX-0.05, mY-0.04);
+			Renderers.line(rend, mX-0.075, mY-0.055, 
+				mX-0.05, mY-0.04);
+			Renderers.line(rend, mX-0.025, mY-0.055, 
+				mX-0.05, mY-0.04);
 		}
 		
 		//draw link line
 		if (link == selectedLink)
-			rend->strokeColor = (Color){.r=1.0, .b=1.0, .g=1.0, .a=1.0};
+			rend->strokeColor = 
+				(Color){.r=1.0, .b=1.0, .g=1.0, .a=1.0};
 		Renderers.line(rend, link->first->x, link->first->y,
 			link->second->x, link->second->y);
 			
@@ -168,13 +184,16 @@ static void drawNodes(Renderer* rend)
 	{
 		DFANode* node = DFANodeLists.next(&DFANodes);
 		
-		rend->fillColor = (Color){.r=0.2, .g=0.2, .b=0.2, .a=0.5};
+		rend->fillColor = 
+			(Color){.r=0.2, .g=0.2, .b=0.2, .a=0.5};
 		Renderers.circle(rend, node->x, node->y, 0.1, 1.0);
 		
 		if (node->isAccept)
 		{
-			rend->fillColor = (Color){.r=0.7, .g=0.2, .b=0.2, .a=1.0};
-			Renderers.circle(rend, node->x, node->y, 0.08, 1.0);
+			rend->fillColor = 
+				(Color){.r=0.7, .g=0.2, .b=0.2, .a=1.0};
+			Renderers.circle(rend, node->x, 
+				node->y, 0.08, 1.0);
 		}
 
 	}
@@ -207,8 +226,10 @@ static void draw(Renderer* rend)
 	//draw selected node for link mode
 	if (linkOne)
 	{
-		rend->fillColor = (Color){.r=1.0, .g=1.0, .b=1.0, .a=0.25};
-		Renderers.circle(rend, linkOne->x, linkOne->y, 0.11, 1.0);
+		rend->fillColor = 
+			(Color){.r=1.0, .g=1.0, .b=1.0, .a=0.25};
+		Renderers.circle(rend, linkOne->x,
+			linkOne->y, 0.11, 1.0);
 	}
 	
 	drawNodes(rend);
@@ -216,31 +237,38 @@ static void draw(Renderer* rend)
 	//draw start node
 	if (startNode)
 	{
-		rend->fillColor = (Color){.r=0.4, .g=1.0, .b=0.4, .a=1.0};
-		Renderers.circle(rend, startNode->x, startNode->y, 0.05, 1.0);
+		rend->fillColor = 
+			(Color){.r=0.4, .g=1.0, .b=0.4, .a=1.0};
+		Renderers.circle(rend, startNode->x, 
+			startNode->y, 0.05, 1.0);
 	}
 	
 	//draw running mode
-	if (pageState == RUNNING && !startNode) pageState = DEFAULT;
+	if (pageState == RUNNING && !startNode) 
+		pageState = DEFAULT;
 	if (pageState == RUNNING )
 	{
 		if (!runningNode) runningNode = startNode;
 		
-		rend->fillColor = (Color){.r=0.7, .g=1.0, .b=0.7, .a=1.0};
-		Renderers.circle(rend, runningNode->x, runningNode->y, 0.12, 1.0);
+		rend->fillColor = 
+			(Color){.r=0.7, .g=1.0, .b=0.7, .a=1.0};
+		Renderers.circle(rend, runningNode->x, 
+			runningNode->y, 0.12, 1.0);
 		
 		if (testSeq.size == 0)
 		{
 			rend->strokeWeight = 0.02;
 			if (runningNode->isAccept && !seqRejected)
 			{
-				rend->strokeColor = (Color){.r=0.0, .g=1.0, .b=0.0, .a=1.0};
+				rend->strokeColor = 
+					(Color){.r=0.0, .g=1.0, .b=0.0, .a=1.0};
 				Renderers.text(rend, -0.8, 0.8,
 					2.0, "SEQUENCE\nACCEPTED", 17);
 			}
 			else
 			{
-				rend->strokeColor = (Color){.r=1.0, .g=0.0, .b=0.0, .a=1.0};
+				rend->strokeColor = 
+					(Color){.r=1.0, .g=0.0, .b=0.0, .a=1.0};
 				Renderers.text(rend, -0.8, 0.8,
 					2.0, "SEQUENCE\nREJECTED", 17);
 			}
@@ -249,11 +277,13 @@ static void draw(Renderer* rend)
 		{	
 			if (lastAnim > 30)
 			{
-				char currentSymbol = CharLists.popFront(&testSeq);
+				char currentSymbol = 
+					CharLists.popFront(&testSeq);
 				int hasTrans = 0;
 				for (int i=0;i<DFALinks.size;i++)
 				{
-					DFALink* link = DFALinkLists.next(&DFALinks);
+					DFALink* link = 
+						DFALinkLists.next(&DFALinks);
 					DFANode* node = link->first;
 					
 					if (node == runningNode)
@@ -261,7 +291,8 @@ static void draw(Renderer* rend)
 						List* transList = &link->transitions;
 						for (int n=0;n<transList->size;n++)
 						{
-							if (CharLists.next(transList) == currentSymbol)
+							if (CharLists.next(transList) == 
+								currentSymbol)
 							{
 								putchar(currentSymbol);
 								hasTrans = 1;
@@ -367,13 +398,31 @@ static void leftClick(AppData* appdata, int action)
 					node->x, node->y) < 0.4)
 				{
 					collisionCheck = 0;
+					if (dist(mouseX, mouseY,
+						node->x, node->y) < 0.1)
+					{
+						for (int n=0;n<DFALinks.size;n++)
+						{
+							DFALink* link = 
+								DFALinkLists.next(&DFALinks);
+							if (node == link->first 
+								|| node == link->second)
+							{
+								DFALinkLists.delNode(
+									&DFALinks, link);
+							}
+						}
+						DFALinkLists.resetCursor(&DFALinks);
+						
+						DFANodeLists.delNode(&DFANodes, node);
+					}
 					break;
 				}
 			}
 			
 			DFANodeLists.resetCursor(&DFANodes);
 			
-			if (collisionCheck == 1)
+			if (collisionCheck)
 			{
 				DFANodeLists.push(&DFANodes,
 					DFANodes.size+1, mouseX, mouseY);
@@ -398,7 +447,8 @@ static void leftClick(AppData* appdata, int action)
 						int foundLink = 0;
 						for (int n = 0; n < DFALinks.size; n++)
 						{
-							DFALink* link = DFALinkLists.next(&DFALinks);
+							DFALink* link = 
+								DFALinkLists.next(&DFALinks);
 							if (link->first == linkOne 
 								&& link->second == node)
 							{
@@ -411,8 +461,10 @@ static void leftClick(AppData* appdata, int action)
 						
 						if (foundLink == 0)
 						{
-							DFALinkLists.push(&DFALinks, linkOne, node);
-							selectedLink = DFALinkLists.peek(&DFALinks);
+							DFALinkLists.push(
+								&DFALinks, linkOne, node);
+							selectedLink = 
+								DFALinkLists.peek(&DFALinks);
 						}
 						
 						linkOne = NULL;
@@ -510,7 +562,8 @@ static void keyPress(AppData* appdata, int key, int action)
 			{
 				if (selectedLink->transitions.size == 0)
 				{
-					DFALinkLists.delNode(&DFALinks, selectedLink);
+					DFALinkLists.delNode(
+						&DFALinks, selectedLink);
 					selectedLink = NULL;
 				}
 				pageState = LINKNODES;
@@ -520,19 +573,24 @@ static void keyPress(AppData* appdata, int key, int action)
 				int canAdd = 1;
 				for (int i=0;i<DFALinks.size;i++)
 				{
-					DFALink* link = DFALinkLists.next(&DFALinks);
+					DFALink* link = 
+						DFALinkLists.next(&DFALinks);
 					
 					if (link->first == selectedLink->first)
 					{
-						for (int n=0;n<link->transitions.size;n++)
+						for (int n=0;
+							n<link->transitions.size;n++)
 						{
-							if ((char)key == CharLists.next(&link->transitions))
+							if ((char)key == 
+								CharLists.next(
+									&link->transitions))
 							{
 								canAdd = 0;
 								break;
 							}
 						}
-						CharLists.resetCursor(&link->transitions);
+						CharLists.resetCursor
+							(&link->transitions);
 					}
 					
 					if (!canAdd) break;
@@ -540,7 +598,8 @@ static void keyPress(AppData* appdata, int key, int action)
 				DFALinkLists.resetCursor(&DFALinks);
 				
 				if (canAdd)
-					CharLists.push(&selectedLink->transitions, (char)key);
+					CharLists.push(
+						&selectedLink->transitions, (char)key);
 			}
 			return;
 		}
