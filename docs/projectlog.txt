@@ -384,4 +384,10 @@
   made the selected node release when leaving linking mode
   added Default state
 < Tue Nov 28 17:24:10 2023
+> Tue Nov 28 19:49:18 2023
+  rejecting non-deterministic state transitions being added
+  made the selected link turn white in writelink mode
+  pruned old logging
+  renamed SETENDS SETACCEPT
+< Tue Nov 28 20:22:12 2023
 

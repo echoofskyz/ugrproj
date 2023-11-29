@@ -5,7 +5,7 @@
 #define LINKNODES 2
 #define WRITELINK 3
 #define SETSTART 4
-#define SETENDS 5
+#define SETACCEPT 5
 #define RUNNING 6
 
 static int INIT = 0;
@@ -41,17 +41,6 @@ static void freePage()
 
 static void drawTestSeqBox(Renderer* rend)
 {
-
-	/*char testSeqStr[testSeq.size];
-	
-	for (int i = 0; i < testSeq.size; i++)
-	{
-		testSeqStr[i] = CharLists.next(&testSeq);
-	}
-	
-	CharLists.resetCursor(&testSeq);
-	*/
-	
 	char* testSeqStr = CharLists.toChrPtr(&testSeq);
 	
 	//test seq box background
@@ -83,7 +72,7 @@ static void drawButtons(Renderer* rend)
 	
 	Renderers.circle(rend, 0.6, -0.9, 0.1, 3.0);
 	Renderers.text(rend, 0.52, -0.85, 0.6, "Set\nEnds", 8);
-	if (pageState == SETENDS)
+	if (pageState == SETACCEPT)
 	{
 		Renderers.circle(rend, 0.6, -0.75, 0.04, 3.0);
 	}
@@ -163,6 +152,8 @@ static void drawLinks(Renderer* rend)
 		}
 		
 		//draw link line
+		if (link == selectedLink)
+			rend->strokeColor = (Color){.r=1.0, .b=1.0, .g=1.0, .a=1.0};
 		Renderers.line(rend, link->first->x, link->first->y,
 			link->second->x, link->second->y);
 			
@@ -308,6 +299,38 @@ static float dist(float x1, float y1, float x2, float y2)
 	return sqrt(pow(x1 - x2, 2.0) + pow(y1 - y2, 2.0));
 }
 
+static void exitRunningMode()
+{
+	runningNode = NULL;
+	pageState = DEFAULT;
+	seqRejected = 0;
+	lastAnim = 0;
+}
+
+static void checkClickBtn(double mouseX, double mouseY)
+{
+	if (dist(mouseX, mouseY, -0.6, -0.9) < 0.1)
+	{
+		pageState = EDITNODE;
+	}
+	else if (dist(mouseX, mouseY, -0.2, -0.9) < 0.1)
+	{
+		pageState = LINKNODES;
+	}
+	else if (dist(mouseX, mouseY, 0.2, -0.9) < 0.1)
+	{
+		pageState = SETSTART;
+	}
+	else if (dist(mouseX, mouseY, 0.6, -0.9) < 0.1)
+	{
+		pageState = SETACCEPT;
+	}
+	else if (dist(mouseX, mouseY, 0.0, -0.8) < 0.1)
+	{
+		pageState = RUNNING;
+	}
+}
+
 static void leftClick(AppData* appdata, int action)
 {
 	double mouseX = appdata->mouseX;
@@ -315,13 +338,10 @@ static void leftClick(AppData* appdata, int action)
 	
 	if (action == GLFW_PRESS)
 	{
-		printf("LEFT PRESSED AT: %f, %f\n", mouseX, mouseY);
-		
 		if (pageState == RUNNING)
 		{
-			runningNode = NULL;
-			pageState = DEFAULT;
-			seqRejected = 0;
+			exitRunningMode();
+			return;
 		}
 		
 		if (pageState == WRITELINK)
@@ -422,7 +442,7 @@ static void leftClick(AppData* appdata, int action)
 			DFANodeLists.resetCursor(&DFANodes);
 		}
 		
-		if (pageState == SETENDS)
+		if (pageState == SETACCEPT)
 		{
 			for (int i = 0; i < DFANodes.size; i++)
 			{
@@ -447,46 +467,13 @@ static void leftClick(AppData* appdata, int action)
 			DFANodeLists.resetCursor(&DFANodes);
 		}
 		
-		if (dist(mouseX, mouseY, -0.6, -0.9) < 0.1)
-		{
-			pageState = EDITNODE;
-		}
-		if (dist(mouseX, mouseY, -0.2, -0.9) < 0.1)
-		{
-			pageState = LINKNODES;
-		}
-		if (dist(mouseX, mouseY, 0.2, -0.9) < 0.1)
-		{
-			pageState = SETSTART;
-		}
-		if (dist(mouseX, mouseY, 0.6, -0.9) < 0.1)
-		{
-			pageState = SETENDS;
-		}
-		if (dist(mouseX, mouseY, 0.0, -0.8) < 0.1)
-		{
-			pageState = RUNNING;
-		}
-	}
-	else if (action == GLFW_RELEASE)
-	{
-		printf("LEFT RELEASED AT: %f, %f\n", mouseX, mouseY);
+		checkClickBtn(mouseX, mouseY);
 	}
 }
 
 static void rightClick(AppData* appdata, int action)
 {
-	double mouseX = appdata->mouseX;
-	double mouseY = appdata->mouseY;
-	
-	if (action == GLFW_PRESS)
-	{
-		printf("RIGHT PRESSED AT: %f, %f\n", mouseX, mouseY);
-	}
-	else if (action == GLFW_RELEASE)
-	{
-		printf("RIGHT RELEASED AT: %f, %f\n", mouseX, mouseY);
-	}
+
 }
 
 static void click(AppData* appdata, int button, int action)
@@ -503,8 +490,6 @@ static void click(AppData* appdata, int button, int action)
 
 static void keyPress(AppData* appdata, int key, int action)
 {
-	printf("KEY PRESSED: %c, %d\n", key, key);
-	
 	//this makes it not accept the windows key as w
 	if (key == GLFW_KEY_LEFT_SUPER) return;
 	
@@ -512,10 +497,7 @@ static void keyPress(AppData* appdata, int key, int action)
 	{
 		if (pageState == RUNNING)
 		{
-			runningNode = NULL;
-			pageState = DEFAULT;
-			seqRejected = 0;
-			lastAnim = 0;
+			exitRunningMode();
 			return;
 		}
 		
@@ -535,7 +517,30 @@ static void keyPress(AppData* appdata, int key, int action)
 			}
 			else
 			{
-				CharLists.push(&selectedLink->transitions, (char)key);
+				int canAdd = 1;
+				for (int i=0;i<DFALinks.size;i++)
+				{
+					DFALink* link = DFALinkLists.next(&DFALinks);
+					
+					if (link->first == selectedLink->first)
+					{
+						for (int n=0;n<link->transitions.size;n++)
+						{
+							if ((char)key == CharLists.next(&link->transitions))
+							{
+								canAdd = 0;
+								break;
+							}
+						}
+						CharLists.resetCursor(&link->transitions);
+					}
+					
+					if (!canAdd) break;
+				}
+				DFALinkLists.resetCursor(&DFALinks);
+				
+				if (canAdd)
+					CharLists.push(&selectedLink->transitions, (char)key);
 			}
 			return;
 		}

@@ -94,7 +94,7 @@ static void click(AppData* appdata, int button, int action)
 
 static void keyPress(AppData* appdata, int key, int action)
 {
-
+	printf("KEY PRESSED: %c, %d\n", key, key);
 }
 
 const Page startPage =
