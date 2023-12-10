@@ -5,13 +5,15 @@
 
 #include <stddef.h>
 
-typedef struct ListNode {
+typedef struct ListNode
+{
 	struct ListNode* prev;
 	struct ListNode* next;
 	void* data;
 } ListNode;
 
-typedef struct List {
+typedef struct List 
+{
 	unsigned int size;
 	ListNode* head;
 	ListNode* tail;

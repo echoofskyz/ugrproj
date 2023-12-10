@@ -3,7 +3,8 @@
 
 #include "Color.h"
 
-typedef struct Renderer {
+typedef struct Renderer
+{
 	Color fillColor;
 	Color strokeColor;
 	double strokeWeight;
