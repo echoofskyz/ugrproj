@@ -1,0 +1,98 @@
+classes:
+Real Time Embedded Systems
+Compilers
+Programming Languages and Paradigms
+Opperating Systems
+Software Verification and Validation
+Database Systems
+Intermidiate Computing (Mobile Development)
+Bioinformatics Algorithms
+Theory of Computation
+Project Management
+
+
+-interperter that allows you to resolve missing resources at run time
+
+-app that makes a preprocesser that translates custom syntax into C (basically macros?)
+
+-my own JS finite atomata modeler/simulator
+
+-DIY git server on Android?
+
+-make old phones into DIY home security?
+
+-make a better voice assistaint \
+
+-my old idea about a WearOS based universial controller
+
+-wardriving off of WearOS
+
+-Advanced Cheating Techniques using whatever tech I can get my hands on
+
+-download full videos from panopto/youtube/etc the ... brain f script
+
+-literally anything implemented solely using lambda functions and variable references
+
+-a compiler for a language of only lambda functions written in said language
+ 
+-somehow determining what assembly environment?? a binary file is run in
+	and therefore being able to make universal apps
+
+compile assembly to C
+-and back
+-and forth
+-and ...
+
+-building a game in assembly language
+
+-creating an error free language
+	EVERYTHING is a valid program
+	actually kinda interesting
+	start with just accepting any file as a valid hello world or something
+	then idk maybe metadata like file length has meaning
+	maybe if certain sequences show up it can do certain behaveiours
+	actually, should meet some minimum requirement for being a capable language
+		file i/o
+		networking
+		display
+		... control flow?
+			-for everything to be valid, could avoid infinite loops by
+				not allowing any kind of recursion 
+				and having loop structures be limited in loop count
+			-but that would mean I cant have interactive apps?
+
+-build my own database
+
+* Building a Cross-Platform Workout Tracking App
+* Evaluating Genetic Algorithms in Random Environments
+* An eInk Display for Room Scheduling
+* Code Readability: A Study on the Effects of Pyschology and Comprehension in Software Development and Maintenance
+* Building Your Own Raspberry Pi SMS Station
+* Common Techniques in Recommender Systems
+* An IoT Home Monitoring System
+* SpecApp: A Web Application for Specifications Grading
+* Building a Biofeedback Game
+* Reducing Security Vulnerabilities with Lightweight Specifications
+* An Experimental Exploration of the CAP Theorem and Distributed Databases
+* Building a Distributed Smart Mirror
+* DebuggAR: Augmented Reality for Debugging and Code Review
+* Exploring Mordern Low-Cost IoT Devices
+* An iOS App for Real Time Calculation of Reactive Strength Index
+* Using Hyperspectral Imaging and Artificial Neural Networks to Detect E. Coli on Romaine Lettuce and Spinach
+	-Hyperspectral Imaging is literally just they removed the IR filter from their camera right?
+* MyPromptBook: A Multi-Platform App for Theater Management
+* DIY-DSP: A Curriculum for Learning Electronics Design and DSP With a Guitar Effects Pedal
+* Pool ShARk: An Augmented Reality Pool Assistant
+* FreeHack: An Open Source Lab Environment for Penetration Testing Education
+* A Formal Methods Knapsack: Maximizing Security and Minimizing Cost
+* rtk4all: A Low-Cost High-Accuracy GPS Survey System
+* Wireless Sensor Networks Using UAV Data Mules: An Empirical Study
+* Measuring Contract Effectiveness for Introductory Programming Assignments
+* Specifying Distributed and Embedded Systems with TLA+
+* UAV Playground: Teaching Distributed and Embedded Programming with Swift Playgrounds and UAVs
+* Sensor Localization on the Fly: UAVs and Sensor Networks
+* Real-Time Landcover Classification of Hyperspectral Imagery Using Deep Convolutional Neural Networks
+* Using UAVs as Data Mules in Sensor Networks
+* Hardware Design for JamBox, A Tactile Input Device
+* Live Notes: Bringing the Power of Desktop MIDI Input to the Android Platform
+* Search Algorithms for Embedded Systems
