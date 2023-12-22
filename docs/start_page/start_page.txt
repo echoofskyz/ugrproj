@@ -1,0 +1,12 @@
+renders start options/buttons
+
+buttons:
+	finite automata
+	load from file
+
+when finite automata is selected:
+	opens finite automata page with new/empty model
+
+when load from file is selected:
+	opens a file selection dialoge
+	launches appropriate model page based on file

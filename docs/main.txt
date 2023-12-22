@@ -1,0 +1,18 @@
+creates window
+-sets up environmental stuff
+
+-remove default page decorations
+-add new page decorations
+	close button
+	minimize
+	maximize
+	fullscreen
+	options specific to pages
+
+opens start menu page
+
+credits:
+Andy Berns: rubber duck
+GLFW docs
+khronos group wiki
+the learn open gl site i was using

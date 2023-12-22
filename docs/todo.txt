@@ -1,0 +1,4 @@
+* statically link glfwlib & glibc in Linux
+* ?allow wildcard transitions
+* flatten & part out functions
+* get .sh files to work correctly

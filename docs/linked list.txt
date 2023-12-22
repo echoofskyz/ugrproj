@@ -1,0 +1,46 @@
+// List l = new_List();
+
+struct node {
+	data
+	next
+}
+
+typedef struct List {
+	head
+	tail
+	size
+	get
+	delete
+	push
+	pop
+}
+
+List new_List() {
+	head = null
+	tail = null
+	size = 0
+	get = if size > ind
+		n = head
+		for i = 0 i < ind i++
+			n = n.next
+		return head.next.data
+	delete = if size > ind
+		n = head
+		for i = 0 i < ind i++
+			n = n.next
+		n2 = n.next
+		n.next = n2.next
+		free(n2)
+	push =
+		n = malloc + data
+		if size == 0
+			head = n 
+			tail = n
+		tail.next = n
+		tail = n
+	pop = n0 = get size-1
+		n0.next = null
+		free tail
+		tail = n0
+	free
+}

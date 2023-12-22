@@ -1,0 +1,29 @@
+MVP:
+	start page: -XML?
+		button for finite automata
+	D finite automata:
+		can create, name, set initial, set final, and link (with accepted input)
+		can simulate it with an input
+Need:
+- page managment system
+- ability to render images
+- ability to render text
+- abstraction and implementation for creating, rendering, manipulating, DFA
+- way to give and run DFA on input
+
+Features:
+ 1 : save/load automata as JSON or something
+ 2 : add button for loading
+ 3 : add instruction for keybindings
+ 4 : add NFA
+ 5 : add TM
+ 6 : make the modelers better
+ 7 : add ... automata
+ 8 : make it pretty
+ 9 : add toolbar menu
+10 : add window customization
+11 : add Polish language 
+12 : make it be able to write the state machine as a C program?
+13 : setup programming environment stuff to build on linux etc
+14 : see if I can compile it as a portable executable
+15 : optimization 

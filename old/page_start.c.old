@@ -1,0 +1,54 @@
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+#include "page_start.h"
+#include "shader_man.h"
+
+static const char* vertexShader0Source =
+	"#version 330 core\n"
+	"layout (location = 0) in vec3 aPos;\n"
+	"void main()\n"
+	"{\n"
+	"	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0);\n"
+	"}\0";
+
+static const char* fragmentShader0Source = 
+	"#version 330 core\n"
+	"out vec4 FragColor;\n"
+	"void main()\n"
+	"{\n"
+	"	FragColor = vec4(gl_FragCoord.x/640.0, gl_FragCoord.y/480.0, 0.5f, 0.5f);"
+	"}\0";
+
+static unsigned int shader;
+
+float vertices[] = {
+	1.0f, -1.0f, 0.0f,
+	-1.0f, 1.0f, 0.0f,
+	-1.0f, -1.0f, 0.0f,
+	1.0f, -1.0f, 0.0f,
+	-1.0f, 1.0f, 0.0f,
+	1.0f, 1.0f, 0.0f
+};
+
+static unsigned int VAO;
+static unsigned int VBO;
+
+void init_start() {
+	shader = compileShaderFromStrings(vertexShader0Source, fragmentShader0Source);
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+
+	glBindVertexArray(VAO);
+
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+}
+
+void draw_start() {
+	glUseProgram(shader);
+	glBindVertexArray(VAO);
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+}
